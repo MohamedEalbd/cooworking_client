@@ -22,7 +22,9 @@ class ApiChecker {
       customSnackBar("too_many_request".tr, showDefaultSnackBar: showDefaultToaster);
     }
     else{
-     customSnackBar("${response.body['message']}", showDefaultSnackBar: showDefaultToaster);
+      print("response.bodysssss");
+      print(response.body);
+   //  customSnackBar("${response.body['message']}", showDefaultSnackBar: showDefaultToaster);
     }
   }
 }

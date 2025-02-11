@@ -44,7 +44,7 @@ class _WebLandingPageState extends State<WebLandingPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<WebLandingController>(
+    return  GetBuilder<WebLandingController>(
 
       builder: (webLandingController){
         if(webLandingController.webLandingContent != null){
@@ -52,6 +52,7 @@ class _WebLandingPageState extends State<WebLandingPage> {
 
           return FooterBaseView(
             bottomPadding: false,
+
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
@@ -105,31 +106,31 @@ class _WebLandingPageState extends State<WebLandingPage> {
                                 ),
                                 const SizedBox(height: Dimensions.paddingSizeSmall),
                                 Text(
-                                 textContent['download_section_description']??"",
+                                  textContent['download_section_description']??"",
                                   textAlign: TextAlign.center,
                                   style: robotoRegular.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color,
                                       fontSize: Dimensions.fontSizeDefault),
                                 ),
                                 const SizedBox(height: Dimensions.paddingSizeLarge),
-                                  Row(
+                                Row(
                                   children: [
-                                   if( _config.content!.appUrlAndroid != null)
-                                    InkWell(
-                                      onTap: () async {
-                                        if(await canLaunchUrlString(_config.content!.appUrlAndroid!)) {launchUrlString(_config.content!.appUrlAndroid!);
-                                        }},
-                                      child: Image.asset(Images.playStoreIcon, height: 45),
-                                    ) ,
+                                    if( _config.content!.appUrlAndroid != null)
+                                      InkWell(
+                                        onTap: () async {
+                                          if(await canLaunchUrlString(_config.content!.appUrlAndroid!)) {launchUrlString(_config.content!.appUrlAndroid!);
+                                          }},
+                                        child: Image.asset(Images.playStoreIcon, height: 45),
+                                      ) ,
 
                                     const SizedBox(width: Dimensions.paddingSizeDefault,),
                                     if(_config.content!.appUrlIos != null )
                                       InkWell(
-                                      onTap: () async {
-                                        if(await canLaunchUrlString(_config.content!.appUrlIos!)) {
-                                          launchUrlString(_config.content!.appUrlIos!);
-                                        }
+                                        onTap: () async {
+                                          if(await canLaunchUrlString(_config.content!.appUrlIos!)) {
+                                            launchUrlString(_config.content!.appUrlIos!);
+                                          }
                                         },
-                                      child: Image.asset(Images.appStoreIcon, height: 45),)
+                                        child: Image.asset(Images.appStoreIcon, height: 45),)
 
                                   ],
                                 ),
@@ -162,21 +163,21 @@ class _WebLandingPageState extends State<WebLandingPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   if(textContent['web_bottom_title'] != null && textContent['web_bottom_title'] != '')
-                                  Text(textContent['web_bottom_title']!,style: robotoBold.copyWith(fontSize: 16),),
+                                    Text(textContent['web_bottom_title']!,style: robotoBold.copyWith(fontSize: 16),),
                                   const SizedBox(height: Dimensions.paddingSizeDefault,),
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       LiveChatButton(
-                                          title:'chat'.tr,
-                                          iconData:Icons.message,
-                                          isBorderActive:false,
+                                        title:'chat'.tr,
+                                        iconData:Icons.message,
+                                        isBorderActive:false,
                                       ),
                                       const SizedBox(width:Dimensions.paddingSizeDefault),
                                       LiveChatButton(
-                                          title:Get.find<SplashController>().configModel.content!.businessPhone!,
-                                          iconData:Icons.call,
-                                          isBorderActive:true,
+                                        title:Get.find<SplashController>().configModel.content!.businessPhone!,
+                                        iconData:Icons.call,
+                                        isBorderActive:true,
                                       ),
                                     ],
                                   )

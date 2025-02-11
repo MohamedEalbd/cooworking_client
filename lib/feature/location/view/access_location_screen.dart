@@ -54,7 +54,8 @@ class _AccessLocationScreenState extends State<AccessLocationScreen> {
         appBar: CustomAppBar(title: 'set_location'.tr, isBackButtonExist: false, shakeKey: shakeKey,),
         body: SafeArea(child: Center(
           child: GetBuilder<LocationController>(builder: (locationController) {
-            return (ResponsiveHelper.isDesktop(context)) &&  !widget.fromHome ? WebLandingPage(fromSignUp: widget.fromSignUp,  route: widget.route, shakeKey: shakeKey,) :
+            return (ResponsiveHelper.isDesktop(context)) &&  !widget.fromHome ?
+            WebLandingPage(fromSignUp: widget.fromSignUp,  route: widget.route, shakeKey: shakeKey,) :
             Column(
               children: [
                 Expanded(

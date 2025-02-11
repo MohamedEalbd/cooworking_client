@@ -53,26 +53,39 @@ class ApiClient extends GetxService {
 
   Future<Response> getData(String uri, {Map<String, dynamic>? query, Map<String, String>? headers}) async {
     printLog('====> API Call: $uri\nHeader: $_mainHeaders');
+
+    dioPackage.Dio dio = dioPackage.Dio();
+    dio.options.headers.addAll(headers ?? _mainHeaders);
+    dio.options.connectTimeout = const Duration(milliseconds: 1000000);
+    dio.options.receiveTimeout = const Duration(milliseconds: 1000000);
+
+    DateTime startTime = DateTime.now();
+    dioPackage.Response response;
+
     try {
-      printLog('====> API Call: $uri\nHeader: $_mainHeaders');
-      Map<String, String>? header= {
-        'Content-Type': 'application/json; charset=UTF-8',
-
-        AppConstants.localizationKey: languageCode ?? AppConstants.languages[0].languageCode!,
-        if(token !=null)  'Authorization': 'Bearer $token',
-        AppConstants.guestId : guestID ?? "",
-      };
-      http.Response response = await http.get(
-        Uri.parse(appBaseUrl! + uri),
-        headers: headers ?? _mainHeaders,
-
-      ).timeout(Duration(seconds: timeoutInSeconds));
-
-      return handleResponse(response, uri);
-    } catch (e) {
-      return Response(statusCode: 1, statusText: noInternetMessage);
+      response = await dio.get(
+        appBaseUrl! + uri,
+        queryParameters: query,
+      );
+    } on dioPackage.DioException catch (e) {
+      if (e.type == dioPackage.DioExceptionType.connectionTimeout ||
+          e.type == dioPackage.DioExceptionType.receiveTimeout) {
+        print("Request timeout");
+        return Response(statusCode: 1, statusText: noInternetMessage);
+      } else {
+        print("Error: $e");
+        return Response(statusCode: 1, statusText: noInternetMessage);
+      }
     }
+
+    DateTime endTime = DateTime.now();
+    print("Response status: ${response.statusCode}");
+    print("Response body: ${response.data}");
+    print("Request duration: ${endTime.difference(startTime).inSeconds} seconds");
+
+    return handleResponseDio(response, uri);
   }
+
 
   // Future<Response> postData(String? uri, dynamic body, {Map<String, String>? headers}) async {
   //   printLog('====> API Call: $uri\nHeader: $_mainHeaders');
@@ -95,54 +108,54 @@ class ApiClient extends GetxService {
   //     return Response(statusCode: 1, statusText: noInternetMessage);
   //   }
   // }
-  Future<Response> postData(String? uri, dynamic body, {Map<String, String>? headers,bool isCheckout=false}) async {
-    printLog('====> API Call: $uri\nHeader: $_mainHeaders');
-    printLog('====> body : ${body.toString()}');
-    printLog('====> body jsonEncode  : ${jsonEncode(body)}');
+  // Future<Response> postData(String? uri, dynamic body, {Map<String, String>? headers,bool isCheckout=false}) async {
+  //   printLog('====> API Call: $uri\nHeader: $_mainHeaders');
+  //   printLog('====> body : ${body.toString()}');
+  //   printLog('====> body jsonEncode  : ${jsonEncode(body)}');
+  //
+  //   Map<String, String>? header= {
+  //     'Content-Type': 'application/json; charset=UTF-8',
+  //
+  //     AppConstants.localizationKey: languageCode ?? AppConstants.languages[0].languageCode!,
+  //     if(token !=null)  'Authorization': 'Bearer $token',
+  //     AppConstants.guestId : guestID ?? "",
+  //   };
+  //   DateTime startTime = DateTime.now();
+  //   http.Response response;
+  //
+  //   try {
+  //     if(isCheckout) {
+  //       response = await http.post(
+  //         Uri.parse(appBaseUrl! + uri!),
+  //         body: jsonEncode(body),
+  //         headers: header ?? _mainHeaders,
+  //       ).timeout(Duration(seconds: timeoutInSeconds));
+  //     }else{
+  //       response = await http.post(
+  //         Uri.parse(appBaseUrl! + uri!),
+  //         body: jsonEncode(body),
+  //         headers: header ?? _mainHeaders,
+  //       ).timeout(Duration(seconds: timeoutInSeconds));
+  //     }
+  //   } on TimeoutException catch (_) {
+  //     print("Request timeout");
+  //     return Response(statusCode: 1, statusText: noInternetMessage);
+  //   } catch (e) {
+  //     print("Error: $e");
+  //     return Response(statusCode: 1, statusText: noInternetMessage);
+  //   }
+  //
+  //   DateTime endTime = DateTime.now();
+  //   print("Response status: ${response.statusCode}");
+  //   print("Response body: ${response.body}");
+  //   print("Request duration: ${endTime.difference(startTime).inSeconds} seconds");
+  //
+  //   return handleResponse(response, uri);
+  // }
 
-    Map<String, String>? header= {
-      'Content-Type': 'application/json; charset=UTF-8',
-
-      AppConstants.localizationKey: languageCode ?? AppConstants.languages[0].languageCode!,
-      if(token !=null)  'Authorization': 'Bearer $token',
-      AppConstants.guestId : guestID ?? "",
-    };
-    DateTime startTime = DateTime.now();
-    http.Response response;
-
-    try {
-      if(isCheckout) {
-        response = await http.post(
-          Uri.parse(appBaseUrl! + uri!),
-          body: jsonEncode(body),
-          headers: header ?? _mainHeaders,
-        ).timeout(Duration(seconds: timeoutInSeconds));
-      }else{
-        response = await http.post(
-          Uri.parse(appBaseUrl! + uri!),
-          body: jsonEncode(body),
-          headers: header ?? _mainHeaders,
-        ).timeout(Duration(seconds: timeoutInSeconds));
-      }
-    } on TimeoutException catch (_) {
-      print("Request timeout");
-      return Response(statusCode: 1, statusText: noInternetMessage);
-    } catch (e) {
-      print("Error: $e");
-      return Response(statusCode: 1, statusText: noInternetMessage);
-    }
-
-    DateTime endTime = DateTime.now();
-    print("Response status: ${response.statusCode}");
-    print("Response body: ${response.body}");
-    print("Request duration: ${endTime.difference(startTime).inSeconds} seconds");
-
-    return handleResponse(response, uri);
-  }
 
 
-
-  Future<Response> postDataDio(String? uri, dynamic body, {Map<String, String>? headers}) async {
+  Future<Response> postData(String? uri, dynamic body, {Map<String, String>? headers}) async {
     printLog('====> API Call: $uri\nHeader: $_mainHeaders');
     printLog('====> body : ${body.toString()}');
     printLog('====> body jsonEncode  : ${jsonEncode(body)}');

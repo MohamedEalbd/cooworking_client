@@ -63,90 +63,92 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               return FooterBaseView(
                 child: WebShadowWrap(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraLarge),
-                    child: Column(
-                      children: [
-                        Form(
-                          key: customerSignUpKey,
-                          child: Column(
-                            children: [
-                              const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraLarge),
+                      child: Column(
+                        children: [
+                          Form(
+                            key: customerSignUpKey,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge),
 
-                              Hero(tag: Images.logo,
-                                child: Image.asset(Images.logo, width: Dimensions.logoSize),
-                              ),
-
-                              const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge),
-                              if(ResponsiveHelper.isMobile(context))
-                                _firstList(authController),
-                              if(ResponsiveHelper.isMobile(context))
-                                _secondList(authController),
-                             if(!ResponsiveHelper.isMobile(context))
-                             Row(crossAxisAlignment: CrossAxisAlignment.start,children: [
-                                Expanded(child: _firstList(authController),),
-                                const SizedBox(width: Dimensions.paddingSizeLarge,),
-                                Expanded(
-                                  child: _secondList(authController),
+                                Hero(tag: Images.logo,
+                                  child: Image.asset(Images.logo, width: Dimensions.logoSize),
                                 ),
+
+                                const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge),
+                                if(ResponsiveHelper.isMobile(context))
+                                  _firstList(authController),
+                                if(ResponsiveHelper.isMobile(context))
+                                  _secondList(authController),
+                               if(!ResponsiveHelper.isMobile(context))
+                               Row(crossAxisAlignment: CrossAxisAlignment.start,children: [
+                                  Expanded(child: _firstList(authController),),
+                                  const SizedBox(width: Dimensions.paddingSizeLarge,),
+                                  Expanded(
+                                    child: _secondList(authController),
+                                  ),
+                                ]),
                               ]),
-                            ]),
+                            ),
+                          ConditionCheckBox(
+                            checkBoxValue: authController.acceptTerms,
+                            onTap: (bool? value){
+                              if(customerSignUpKey.currentState?.validate() == true){
+                                authController.toggleTerms(value: true);
+                              }else{
+                                authController.toggleTerms(value: false);
+                              }
+                            },
                           ),
-                        ConditionCheckBox(
-                          checkBoxValue: authController.acceptTerms,
-                          onTap: (bool? value){
-                            if(customerSignUpKey.currentState?.validate() == true){
-                              authController.toggleTerms(value: true);
-                            }else{
-                              authController.toggleTerms(value: false);
-                            }
-                          },
-                        ),
-                        const SizedBox(height: Dimensions.paddingSizeExtraLarge),
-                         CustomButton(
-                          buttonText: 'sign_up'.tr,
-                          isLoading: authController.isLoading,
-                          onPressed: authController.acceptTerms
-                              && customerSignUpKey.currentState?.validate() == true
-                              ?  () => _register(authController)
-                              : null,
-                        ),
-                        const SizedBox(height: Dimensions.paddingSizeDefault),
-                        socialLogin == 1 ? Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: ResponsiveHelper.isDesktop(context) ? Dimensions.webMaxWidth /3.5 :
-                            ResponsiveHelper.isTab(context) ? Dimensions.webMaxWidth / 5.5 : 0,
+                          const SizedBox(height: Dimensions.paddingSizeExtraLarge),
+                           CustomButton(
+                            buttonText: 'sign_up'.tr,
+                            isLoading: authController.isLoading,
+                            onPressed: authController.acceptTerms
+                                && customerSignUpKey.currentState?.validate() == true
+                                ?  () => _register(authController)
+                                : null,
                           ),
-                          child: const SocialLoginWidget(fromPage: RouteHelper.home,),
-                        ) : const SizedBox(),
-                        const SizedBox(height: Dimensions.paddingSizeDefault,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('${'already_have_an_account'.tr} ',
-                              style: robotoRegular.copyWith(
-                                fontSize: Dimensions.fontSizeDefault,
-                                color: Theme.of(context).textTheme.bodyLarge!.color,
+                          const SizedBox(height: Dimensions.paddingSizeDefault),
+                          socialLogin == 1 ? Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: ResponsiveHelper.isDesktop(context) ? Dimensions.webMaxWidth /3.5 :
+                              ResponsiveHelper.isTab(context) ? Dimensions.webMaxWidth / 5.5 : 0,
+                            ),
+                            child: const SocialLoginWidget(fromPage: RouteHelper.home,),
+                          ) : const SizedBox(),
+                          const SizedBox(height: Dimensions.paddingSizeDefault,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('${'already_have_an_account'.tr} ',
+                                style: robotoRegular.copyWith(
+                                  fontSize: Dimensions.fontSizeDefault,
+                                  color: Theme.of(context).textTheme.bodyLarge!.color,
+                                ),
                               ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.toNamed(RouteHelper.getSignInRoute());
-                              },
-                              child: Text('sign_in_here'.tr, style: robotoRegular.copyWith(
-                                decoration: TextDecoration.underline,
-                                color: Theme.of(context).colorScheme.tertiary,
-                                fontSize: Dimensions.fontSizeDefault,
-                              )),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: Dimensions.paddingSizeSmall,),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(RouteHelper.getSignInRoute());
+                                },
+                                child: Text('sign_in_here'.tr, style: robotoRegular.copyWith(
+                                  decoration: TextDecoration.underline,
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                  fontSize: Dimensions.fontSizeDefault,
+                                )),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: Dimensions.paddingSizeSmall,),
 
-                         const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge,),
+                           const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge,),
 
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   ),

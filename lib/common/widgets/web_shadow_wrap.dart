@@ -21,7 +21,7 @@ class WebShadowWrap extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints(
           minHeight: minHeight ?? MediaQuery.of(context).size.height * 0.6,
-          maxHeight: maxHeight !=null ? maxHeight! : double.infinity,
+          maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.9,
         ),
         padding: !ResponsiveHelper.isMobile(context) ? const EdgeInsets.all(Dimensions.paddingSizeDefault) : null,
         decoration: !ResponsiveHelper.isMobile(context) ? BoxDecoration(

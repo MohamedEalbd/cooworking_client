@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:get/get.dart';
 import 'utils/core_export.dart';
 import 'helper/get_di.dart' as di;
@@ -91,10 +93,23 @@ Future<String?> initDynamicLinks() async {
 }
 
 class _MyAppState extends State<MyApp> {
+  void configureDioForWeb() {
+    if (Platform.isAndroid || Platform.isIOS) {
+      return; // لا حاجة لتغيير الإعدادات في الموبايل
+    }
+    (Dio().httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+  }
   void _route() async {
 
     Get.find<SplashController>().getConfigData().then((success) async {
-
+       print("success is");
+       print(success);
+       print( Get.find<SplashController>().configModel.message);
       if(Get.find<LocationController>().getUserAddress() != null){
         AddressModel addressModel = Get.find<LocationController>().getUserAddress()!;
         ZoneResponseModel responseModel = await Get.find<LocationController>().getZone(addressModel.latitude.toString(), addressModel.longitude.toString(), false);
@@ -111,7 +126,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    print(" widget.route");
+    print( widget.route);
+    print(kIsWeb);
     if(kIsWeb || widget.route != null)  {
       Get.find<SplashController>().initSharedData();
       Get.find<SplashController>().getCookiesData();
@@ -125,6 +142,7 @@ class _MyAppState extends State<MyApp> {
         var uuid = const Uuid().v1();
         Get.find<SplashController>().setGuestId(uuid);
       }
+
       _route();
     }
   }
@@ -137,7 +155,9 @@ class _MyAppState extends State<MyApp> {
         return GetBuilder<SplashController>(builder: (splashController) {
           if ((GetPlatform.isWeb && splashController.configModel.content == null)) {
             return const SizedBox();
-          } else {return GetMaterialApp(
+          } else
+          {
+            return GetMaterialApp(
             title: AppConstants.appName,
             debugShowCheckedModeBanner: false,
             navigatorKey: Get.key,
