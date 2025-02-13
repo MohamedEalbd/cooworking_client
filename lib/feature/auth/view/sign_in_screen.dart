@@ -75,49 +75,52 @@ class _SignInScreenState extends State<SignInScreen> {
                           SizedBox(height: manualLogin == 1 || otpLogin == 1 ? Dimensions.paddingSizeExtraMoreLarge : Dimensions.paddingSizeDefault),
                       
                       
-                          manualLogin == 1 || otpLogin == 1 ? CustomTextField(
-                            onCountryChanged: (countryCode) => authController.countryDialCode = countryCode.dialCode!,
-                            countryDialCode: authController.isNumberLogin || (manualLogin == 0 && otpLogin ==1) ? authController.countryDialCode : null,
-                            title: 'email_phone'.tr,
-                            hintText: authController.selectedLoginMedium == LoginMedium.otp || (manualLogin == 0 && otpLogin ==1)
-                                ? "please_enter_phone_number".tr : 'enter_email_or_phone'.tr,
-                            controller: signInPhoneController,
-                            focusNode: _phoneFocus,
-                            nextFocus: _passwordFocus,
-                            capitalization: TextCapitalization.words,
-                            onChanged: (String text){
-                              if(authController.selectedLoginMedium != LoginMedium.otp){
-                      
-                      
-                                final numberRegExp = RegExp(r'^[+]?[0-9]+$');
-                      
-                                if(text.isEmpty && authController.isNumberLogin){
-                                  authController.toggleIsNumberLogin();
-                      
+                          manualLogin == 1 || otpLogin == 1 ? Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: CustomTextField(
+                              onCountryChanged: (countryCode) => authController.countryDialCode = countryCode.dialCode!,
+                              countryDialCode: authController.isNumberLogin || (manualLogin == 0 && otpLogin ==1) ? authController.countryDialCode : null,
+                              title: 'email_phone'.tr,
+                              hintText: authController.selectedLoginMedium == LoginMedium.otp || (manualLogin == 0 && otpLogin ==1)
+                                  ? "please_enter_phone_number".tr : 'enter_email_or_phone'.tr,
+                              controller: signInPhoneController,
+                              focusNode: _phoneFocus,
+                              nextFocus: _passwordFocus,
+                              capitalization: TextCapitalization.words,
+                              onChanged: (String text){
+                                if(authController.selectedLoginMedium != LoginMedium.otp){
+                                                  
+                                                  
+                                  final numberRegExp = RegExp(r'^[+]?[0-9]+$');
+                                                  
+                                  if(text.isEmpty && authController.isNumberLogin){
+                                    authController.toggleIsNumberLogin();
+                                                  
+                                  }
+                                  if(text.startsWith(numberRegExp) && !authController.isNumberLogin && manualLogin == 1){
+                                    authController.toggleIsNumberLogin();
+                                    final cursorPosition = signInPhoneController.selection.baseOffset;
+                                    signInPhoneController.text = text.replaceAll("+", "");
+                                    signInPhoneController.selection = TextSelection.fromPosition(TextPosition(offset: cursorPosition));
+                                  }
+                                  final emailRegExp = RegExp(r'@');
+                                  if(text.contains(emailRegExp) && authController.isNumberLogin && manualLogin == 1){
+                                    authController.toggleIsNumberLogin();
+                                  }
+                                                  
+                                  _phoneFocus.requestFocus();
                                 }
-                                if(text.startsWith(numberRegExp) && !authController.isNumberLogin && manualLogin == 1){
-                                  authController.toggleIsNumberLogin();
-                                  final cursorPosition = signInPhoneController.selection.baseOffset;
-                                  signInPhoneController.text = text.replaceAll("+", "");
-                                  signInPhoneController.selection = TextSelection.fromPosition(TextPosition(offset: cursorPosition));
+                              },
+                              onValidate: (String? value){
+                                if(otpLogin == 1 && manualLogin == 0 && PhoneVerificationHelper.getValidPhoneNumber(authController.countryDialCode+signInPhoneController.text.trim(), withCountryCode: true) == ""){
+                                  return "enter_valid_phone_number".tr;
                                 }
-                                final emailRegExp = RegExp(r'@');
-                                if(text.contains(emailRegExp) && authController.isNumberLogin && manualLogin == 1){
-                                  authController.toggleIsNumberLogin();
+                                if(authController.isNumberLogin && PhoneVerificationHelper.getValidPhoneNumber(authController.countryDialCode+signInPhoneController.text.trim(), withCountryCode: true) == ""){
+                                  return "enter_valid_phone_number".tr;
                                 }
-                      
-                                _phoneFocus.requestFocus();
-                              }
-                            },
-                            onValidate: (String? value){
-                              if(otpLogin == 1 && manualLogin == 0 && PhoneVerificationHelper.getValidPhoneNumber(authController.countryDialCode+signInPhoneController.text.trim(), withCountryCode: true) == ""){
-                                return "enter_valid_phone_number".tr;
-                              }
-                              if(authController.isNumberLogin && PhoneVerificationHelper.getValidPhoneNumber(authController.countryDialCode+signInPhoneController.text.trim(), withCountryCode: true) == ""){
-                                return "enter_valid_phone_number".tr;
-                              }
-                              return (PhoneVerificationHelper.getValidPhoneNumber(authController.countryDialCode+signInPhoneController.text.trim(), withCountryCode: true) != "" || GetUtils.isEmail( value ?? "")) ? null : 'enter_email_or_phone'.tr;
-                            },
+                                return (PhoneVerificationHelper.getValidPhoneNumber(authController.countryDialCode+signInPhoneController.text.trim(), withCountryCode: true) != "" || GetUtils.isEmail( value ?? "")) ? null : 'enter_email_or_phone'.tr;
+                              },
+                            ),
                           ) : const SizedBox.shrink(),
                       
                       
