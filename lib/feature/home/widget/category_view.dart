@@ -66,7 +66,7 @@ class CategoryView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeSmall + 3 : Dimensions.paddingSizeDefault,),
+                              SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeExtraSmall  : Dimensions.paddingSizeDefault,),
 
                               Expanded(
                                 child: Padding(
@@ -74,13 +74,15 @@ class CategoryView extends StatelessWidget {
                                   child: Text(categoryController.categoryList![index].name!,
                                     style: robotoRegular.copyWith(
                                       fontSize: Dimensions.fontSizeSmall,
-                                      color: hovered ? Theme.of(context).colorScheme.primary : Theme.of(context).textTheme.bodySmall?.color,
+                                      height: 1.3,
+                                      color: hovered ? Theme.of(context).colorScheme.primary :
+                                      Theme.of(context).textTheme.bodySmall?.color,
                                     ),
                                     maxLines: 2, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ),
-
+                              SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeExtraSmall  : Dimensions.paddingSizeDefault,),
 
                             ]),
                           ),
