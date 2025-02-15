@@ -75,7 +75,7 @@ class VerificationScreenState extends State<VerificationScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
 
-                      Image.asset(Images.otp, width: 140),
+                      Image.asset(Images.logo, width: 140),
                       const SizedBox(height: Dimensions.paddingSizeDefault,),
 
                         Get.find<SplashController>().configModel.content?.appEnvironment == "demo" ? Text(
@@ -104,34 +104,37 @@ class VerificationScreenState extends State<VerificationScreen> {
 
                       const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge,),
 
-                      PinCodeTextField(
-                        length: 6,
-                        appContext: context,
-                        keyboardType: TextInputType.number,
-                        animationType: AnimationType.slide,
-                        pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.box,
-                          fieldHeight: ResponsiveHelper.isMobile(context) ? width/9 : 60,
-                          fieldWidth: ResponsiveHelper.isMobile(context) ? width/9 : 60,
-                          borderWidth: 0.5,
-                          activeBorderWidth: 0.5,
-                          inactiveBorderWidth: 0.5,
-                          errorBorderWidth: 0.5,
-                          borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
-                          selectedColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error.withValues(alpha: 0.5) : Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
-                          selectedFillColor: Get.isDarkMode?Colors.grey.withValues(alpha: 0.6):Colors.white,
-                          inactiveFillColor: Theme.of(context).cardColor,
-                          inactiveColor: Theme.of(context).colorScheme.primary.withValues(alpha: Get.isDarkMode ?  0.7 : 0.2),
-                          activeColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.primary.withValues(alpha: 0.4),
-                          activeFillColor: Theme.of(context).cardColor,
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: PinCodeTextField(
+                          length: 6,
+                          appContext: context,
+                          keyboardType: TextInputType.number,
+                          animationType: AnimationType.slide,
+                          pinTheme: PinTheme(
+                            shape: PinCodeFieldShape.box,
+                            fieldHeight: ResponsiveHelper.isMobile(context) ? width/9 : 60,
+                            fieldWidth: ResponsiveHelper.isMobile(context) ? width/9 : 60,
+                            borderWidth: 0.5,
+                            activeBorderWidth: 0.5,
+                            inactiveBorderWidth: 0.5,
+                            errorBorderWidth: 0.5,
+                            borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
+                            selectedColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error.withValues(alpha: 0.5) : Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                            selectedFillColor: Get.isDarkMode?Colors.grey.withValues(alpha: 0.6):Colors.white,
+                            inactiveFillColor: Theme.of(context).cardColor,
+                            inactiveColor: Theme.of(context).colorScheme.primary.withValues(alpha: Get.isDarkMode ?  0.7 : 0.2),
+                            activeColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.primary.withValues(alpha: 0.4),
+                            activeFillColor: Theme.of(context).cardColor,
+                          ),
+                          animationDuration: const Duration(milliseconds: 300),
+                          backgroundColor: Colors.transparent,
+                          enableActiveFill: true,
+                          onChanged: authController.updateVerificationCode,
+                          beforeTextPaste: (text) => true,
+                          pastedTextStyle: robotoRegular.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color),
+                          textStyle: robotoMedium,
                         ),
-                        animationDuration: const Duration(milliseconds: 300),
-                        backgroundColor: Colors.transparent,
-                        enableActiveFill: true,
-                        onChanged: authController.updateVerificationCode,
-                        beforeTextPaste: (text) => true,
-                        pastedTextStyle: robotoRegular.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color),
-                        textStyle: robotoMedium,
                       ),
 
                         authController.isWrongOtpSubmitted ? Text('incorrect_otp'.tr,

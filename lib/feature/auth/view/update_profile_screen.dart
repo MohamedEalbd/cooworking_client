@@ -122,6 +122,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         inputType: TextInputType.emailAddress,
                         focusNode: _phoneEmailFocus,
                         controller: emailPhoneController,
+                        isRequired: false,
                         onValidate: (String? value){
                           if(widget.email != "" && PhoneVerificationHelper.getValidPhoneNumber(authController.countryDialCode+ emailPhoneController.text.trim(), withCountryCode: true) == ""){
                             return "enter_valid_phone_number".tr;
