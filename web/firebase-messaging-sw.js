@@ -1,14 +1,14 @@
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js");
 
-firebase.initializeApp({
-  apiKey: "AIzaSyATwpBSYz69b5Y9ryQLELOJIHZSpJcXf7I",
-  authDomain: "demancms.firebaseapp.com",
-  projectId: "demancms",
-  storageBucket: "demancms.appspot.com",
-  messagingSenderId: "889759666168",
-  appId: "1:889759666168:web:ab661cb341d3e47384d00d"
-});
+//firebase.initializeApp({
+//  apiKey: "AIzaSyATwpBSYz69b5Y9ryQLELOJIHZSpJcXf7I",
+//  authDomain: "demancms.firebaseapp.com",
+//  projectId: "demancms",
+//  storageBucket: "demancms.appspot.com",
+//  messagingSenderId: "889759666168",
+//  appId: "1:889759666168:web:ab661cb341d3e47384d00d"
+//});
 
 const messaging = firebase.messaging();
 
