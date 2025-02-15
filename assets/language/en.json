@@ -61,6 +61,7 @@
   "all_services": "All Services",
   "see_all": "See All",
   "orders": "Orders",
+  "you_must_select_location_first_to_view": "you must select location first to view",
   "cart": "Cart",
   "add_to_cart": "Add to cart",
   "credit": "Credit",

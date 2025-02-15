@@ -125,6 +125,7 @@
   "Sub_Total(VAT Excluded)": "المجموع الفرعي (بدون الضريبة)",
   "service_charge": "رسوم الخدمة",
   "discount": "الخصم",
+  "you_must_select_location_first_to_view": "يجب عليك تحديد الموقع أولاً لعرضه",
   "if_you_logged_out_your_cart_will_be_removed": "إذا قمت بتسجيل الخروج، فسيتم إزالة عربة التسوق الخاصة بك",
   "just_one_step_away": "على بعد خطوة واحدة فقط",
   "we_have_sent_a_verification_code_to": "لقد أرسلنا رمز التحقق إلى",
