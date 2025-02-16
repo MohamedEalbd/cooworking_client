@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               const RandomCampaignView(),
 
                               const SizedBox(height: Dimensions.paddingSizeLarge),
-                              RecommendedServiceView(height: isLtr ? 210 : 225,),
+                              RecommendedServiceView(height: isLtr ? 225 : 240,),
 
                               SizedBox(height: (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ? Dimensions.paddingSizeLarge : 0,),
 

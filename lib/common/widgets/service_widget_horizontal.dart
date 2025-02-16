@@ -93,47 +93,93 @@ class ServiceWidgetHorizontal extends StatelessWidget {
                         maxLines: 1, overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: Dimensions.paddingSizeExtraSmall),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("starts_from".tr,style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeSmall,
-                              color: Theme.of(context).textTheme.bodyMedium!.color!.withValues(alpha: 0.5)),),
-
-                          Column(
+                          if(discountModel.discountAmount! > 0)
+                            Row(
                               children: [
-                                if(discountAmount! > 0)
-                                  Directionality(
-                                    textDirection: TextDirection.ltr,
-                                    child: Text("${PriceConverter.convertPrice(lowestPrice)} ",
-                                      style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeSmall,
-                                          decoration: TextDecoration.lineThrough,
-                                          color: Theme.of(context).colorScheme.error.withValues(alpha: .8)),
-                                    ),
-                                  ),
-
-                                discountAmount! > 0?
-                                Directionality(
-                                  textDirection: TextDirection.ltr,
-                                  child: Text(PriceConverter.convertPrice(lowestPrice,
-                                      discount: discountAmount!.toDouble(),
-                                      discountType: discountAmountType
-                                  ),
-                                    style: robotoBold.copyWith(fontSize: Dimensions.paddingSizeDefault,
-                                        color: Get.isDarkMode? Theme.of(context).primaryColorLight: Theme.of(context).primaryColor),
-                                  ),
-                                ): Directionality(
-                                  textDirection: TextDirection.ltr,
-                                  child: Text(PriceConverter.convertPrice(lowestPrice),
-                                    style: robotoBold.copyWith(
-                                        fontSize: Dimensions.fontSizeLarge,
-                                        color: Get.isDarkMode? Theme.of(context).primaryColorLight: Theme.of(context).primaryColor),
+                                Expanded(
+                                  child: Text(
+                                    'discount'.tr,
+                                    style: robotoRegular.copyWith(
+                                        fontSize: Dimensions.fontSizeSmall,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
                                   ),
                                 ),
-                              ]
+                                const SizedBox(width: Dimensions.paddingSizeExtraSmall,),
+                                Center(
+                                  child: Text(
+                                    PriceConverter.convertPrice(lowestPrice.toDouble()),
+                                    maxLines: 2,
+                                    style: robotoRegular.copyWith(
+                                        fontSize:Dimensions.fontSizeDefault ,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.lineThrough,
+                                        color: Theme.of(context).colorScheme.error),),
+                                ),
+                              ],
+                            ),
+                          discountModel.discountAmount! > 0?
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'price'.tr,
+                                  style: robotoRegular.copyWith(
+                                      fontSize: Dimensions.fontSizeSmall,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
+                                ),
+                              ),
+                              const SizedBox(width: Dimensions.paddingSizeExtraSmall,),
+                              Directionality(
+                                textDirection: TextDirection.ltr,
+                                child:
+                                Center(
+                                  child: Text(
+                                    PriceConverter.convertPrice(
+                                        lowestPrice.toDouble(),
+                                        discount: discountModel.discountAmount!.toDouble(),
+                                        discountType: discountModel.discountAmountType),
+                                    style: robotoMedium.copyWith(
+                                        fontSize:Dimensions.fontSizeDefault ,
+                                        fontWeight: FontWeight.w400,
+                                        color:  Get.isDarkMode? Theme.of(context).primaryColorLight: ColorResources.primaryColor),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                              :
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'price'.tr,
+                                  style: robotoRegular.copyWith(
+                                      fontSize: Dimensions.fontSizeSmall,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
+                                ),
+                              ),
+                              const SizedBox(width: Dimensions.paddingSizeExtraSmall,),
+                              Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: Center(
+                                  child: Text(
+                                    PriceConverter.convertPrice(lowestPrice.toDouble()),
+                                    textAlign: TextAlign.center,
+                                    style: robotoMedium.copyWith(
+                                        fontSize:Dimensions.fontSizeDefault ,
+                                        fontWeight: FontWeight.w400,
+                                        color: Get.isDarkMode? Theme.of(context).primaryColorLight: ColorResources.primaryColor),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-
-
                         ],
                       ),
                     ]),

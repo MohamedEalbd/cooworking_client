@@ -58,7 +58,7 @@ class HorizontalScrollServiceView extends GetView<ServiceController> {
                   ),
                 ),
                 SizedBox(
-                  height: Get.find<LocalizationController>().isLtr ? ResponsiveHelper.isMobile(context) ? 260 : 270 :  270,
+                  height: Get.find<LocalizationController>().isLtr ? ResponsiveHelper.isMobile(context) ? 285 : 285 :  285,
                   child:ListView.builder(
                     controller: scrollController,
                     physics: const ClampingScrollPhysics(),

@@ -2,7 +2,9 @@ import 'package:khidmh/utils/core_export.dart';
 import 'package:get/get.dart';
 
 class ColorResources {
-
+  static Color white=const Color(0xffffffff);
+  static Color grey=const Color(0xff5D5D5D);
+  static Color primaryColor=Theme.of(Get.context!).primaryColor;
   static Color getRightBubbleColor() {
     return  Theme.of(Get.context!).primaryColor;
   }

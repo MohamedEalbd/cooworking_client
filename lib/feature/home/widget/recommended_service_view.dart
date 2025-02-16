@@ -46,7 +46,7 @@ class RecommendedServiceView extends StatelessWidget {
                           ),
                         ),
 
-                        SizedBox( height:  Get.find<LocalizationController>().isLtr ? 140 : 160,
+                        SizedBox( height:  Get.find<LocalizationController>().isLtr ? 160 : 180,
                           child: ListView.builder(
                             controller: scrollController,
                             physics: const ClampingScrollPhysics(),

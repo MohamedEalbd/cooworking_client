@@ -30,7 +30,7 @@ class HomeRecommendProvider extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: ResponsiveHelper.isMobile(context) ? 160: 170,
+                SizedBox(height: ResponsiveHelper.isMobile(context) ? 175: 185,
                   child: ListView.builder(
                     physics: const ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
