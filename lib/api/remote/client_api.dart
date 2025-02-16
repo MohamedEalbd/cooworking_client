@@ -45,9 +45,10 @@ class ApiClient extends GetxService {
     _mainHeaders = {
       'Content-Type': 'application/json; charset=UTF-8',
       AppConstants.zoneId: zoneIDs ?? '',
+      AppConstants.guestId : guestID ?? "",
       AppConstants.localizationKey: languageCode ?? AppConstants.languages[0].languageCode!,
       if(token !=null)  'Authorization': 'Bearer $token',
-      AppConstants.guestId : guestID ?? "",
+
     };
   }
 
@@ -155,13 +156,22 @@ class ApiClient extends GetxService {
 
 
 
-  Future<Response> postData(String? uri, dynamic body, {Map<String, String>? headers}) async {
+  Future<Response> postData(String? uri, dynamic body, {Map<String, String>? headers,
+    bool? isCheckOut}) async {
     printLog('====> API Call: $uri\nHeader: $_mainHeaders');
     printLog('====> body : ${body.toString()}');
     printLog('====> body jsonEncode  : ${jsonEncode(body)}');
+    var header={
+      'Content-Type': 'application/json; charset=UTF-8',
 
+      AppConstants.guestId : guestID ?? "",
+      AppConstants.localizationKey: languageCode ?? AppConstants.languages[0].languageCode!,
+      if(token !=null)  'Authorization': 'Bearer $token',
+
+    };
+    printLog('====> header : $header');
     dioPackage.Dio dio =  dioPackage.Dio();
-    dio.options.headers.addAll(headers ?? _mainHeaders);
+    dio.options.headers.addAll(isCheckOut==true?header:headers ?? _mainHeaders);
     dio.options.connectTimeout =  const Duration(milliseconds: 1000000);
     dio.options.receiveTimeout =  const Duration(milliseconds: 1000000);
 

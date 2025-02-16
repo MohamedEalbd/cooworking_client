@@ -53,6 +53,6 @@ class CreatePostRepo{
       "post_id" : postId,
       "provider_id":providerId,
       "is_partial" : isPartial,
-    });
+    }, isCheckOut: true);
   }
 }

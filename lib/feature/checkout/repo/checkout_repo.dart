@@ -72,6 +72,8 @@ class CheckoutRepo extends GetxService {
       "booking_type": bookingType,
       "dates": dates,
       "new_user_info": newUserInfo !=null ? jsonEncode(newUserInfo) : null
-    });
+    },
+      isCheckOut: true
+    );
   }
 }
