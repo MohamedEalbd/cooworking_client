@@ -30,7 +30,7 @@ class NearbyProviderMapItemView extends StatelessWidget {
                   Row( crossAxisAlignment: CrossAxisAlignment.start ,children: [
 
                     ClipRRect(borderRadius: BorderRadius.circular(Dimensions.radiusExtraMoreLarge),
-                      child: CustomImage(height: 60, width: 60, fit: BoxFit.cover,
+                      child: CustomImage(height: 60, width: 50, fit: BoxFit.cover,
                         image: providerData.logoFullPath ??"",
                         placeholder: Images.userPlaceHolder,
                       ),
@@ -103,7 +103,7 @@ class NearbyProviderMapItemView extends StatelessWidget {
 
                   ],),
 
-                  const SizedBox(height: Dimensions.paddingSizeSmall,),
+                  const SizedBox(height: Dimensions.paddingSizeMini,),
 
                   Row(children: [
                     Expanded(child: ProviderInfoButton(title: "${providerData.subscribedServicesCount}", subtitle: "services".tr,)),

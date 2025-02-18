@@ -27,7 +27,7 @@ class _NearByProviderListViewState extends State<NearByProviderListView> {
         itemView: Expanded(
           child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: ResponsiveHelper.isDesktop(context) ? 3 : ResponsiveHelper.isTab(context) ? 2 : 1,
-              mainAxisExtent: ResponsiveHelper.isDesktop(context) ? 150 : 140
+              mainAxisExtent: ResponsiveHelper.isDesktop(context) ? 150 : 145
           ),
             itemCount: nearbyProviderController.providerList?.length,
             shrinkWrap: true,

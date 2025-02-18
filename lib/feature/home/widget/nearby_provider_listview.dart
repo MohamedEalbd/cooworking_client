@@ -29,7 +29,7 @@ class NearbyProviderListview extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: ResponsiveHelper.isMobile(context) ? 150 : 160,
+                  SizedBox(height: ResponsiveHelper.isMobile(context) ? 155 : 160,
                     child: ListView.builder(
                       physics: const ClampingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
