@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge),
 
                                 Hero(tag: Images.logo,
-                                  child: Image.asset(Images.logo, width: Dimensions.logoSize),
+                                  child: Image.asset(Images.logo, width: Dimensions.logoSize, color: Theme.of(context).colorScheme.primary),
                                 ),
 
                                 const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge),

@@ -1,4 +1,4 @@
-package com.tatbik.khidmh.client
+package com.tatbik.workspace.client
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -46,6 +46,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         if(widget.fromPage != "fromSettingsPage")
                           Image.asset(
                             Images.logo,
+                            color: Theme.of(context).colorScheme.primary,
                             width: Dimensions.logoSize,
                           ),
                         const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge),

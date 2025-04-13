@@ -18,23 +18,24 @@ subprojects {
                     namespace project.group
                 }
 
-
                 compileOptions {
-                    sourceCompatibility JavaVersion.VERSION_17
-                    targetCompatibility JavaVersion.VERSION_17
+                    // استخدم الإصدار المتاح تلقائيًا
+                    sourceCompatibility JavaVersion.VERSION_1_8 // أو أي إصدار تريده
+                    targetCompatibility JavaVersion.VERSION_1_8 // أو أي إصدار تريده
                 }
+
                 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
                     kotlinOptions {
-                        jvmTarget = "17"
-                    }
-                }
-                java {
-                    toolchain {
-                        languageVersion = JavaLanguageVersion.of(17)
+                        jvmTarget = "1.8" // أو أي إصدار تريده
                     }
                 }
 
-
+                // إزالة toolchain لتحديد Java الافتراضي
+                // java {
+                //     toolchain {
+                //         languageVersion = JavaLanguageVersion.of(17)
+                //     }
+                // }
             }
         }
     }

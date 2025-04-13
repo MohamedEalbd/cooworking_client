@@ -1,0 +1,2 @@
+/Users/zeyad/StudioProjects/Saudi-Arabia Company/Khidmh-Client-app/android/app/.cxx/RelWithDebInfo/5q1x5t6m/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/zeyad/StudioProjects/Saudi-Arabia Company/Khidmh-Client-app/android/app/.cxx/RelWithDebInfo/5q1x5t6m/armeabi-v7a/CMakeFiles/rebuild_cache.dir

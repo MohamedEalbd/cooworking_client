@@ -60,46 +60,48 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       },
 
       child: Scaffold(
-        floatingActionButton: ResponsiveHelper.isDesktop(context) ? null : InkWell(
-          onTap: () => Get.toNamed(RouteHelper.getCartRoute()),
+        // floatingActionButton: ResponsiveHelper.isDesktop(context) ? null :
+        // InkWell(
+        //   onTap: () => Get.toNamed(RouteHelper.getCartRoute()),
+        //   child: Container(
+        //     height: 70,
+        //     width: 70,
+        //     alignment: Alignment.center,
+        //     decoration: BoxDecoration(
+        //       color: _pageIndex == 2
+        //           ? null
+        //           : Get.isDarkMode
+        //           ? Theme.of(context).colorScheme.primary
+        //           : Theme.of(context).primaryColor,
+        //       shape: BoxShape.circle,
+        //       boxShadow: [
+        //         BoxShadow(
+        //           color: Colors.black.withOpacity(0.1), // لون الظل بخفة
+        //           blurRadius: 6, // مدى التمويه
+        //           spreadRadius: 2, // مدى انتشار الظل
+        //           offset: Offset(0, 3), // اتجاه الظل للأسفل قليلًا
+        //         ),
+        //       ],
+        //     ),
+        //     child: CartWidget(
+        //       color: Get.isDarkMode ? Theme.of(context).primaryColorLight : Colors.white,
+        //       size: 30,
+        //     ),
+        //   )
+        //   ,
+        // ),
+        //
+        // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+
+        bottomNavigationBar: ResponsiveHelper.isDesktop(context) ? const SizedBox() : Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
           child: Container(
-            height: 70,
-            width: 70,
-            alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: _pageIndex == 2
-                  ? null
-                  : Get.isDarkMode
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).primaryColor,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1), // لون الظل بخفة
-                  blurRadius: 6, // مدى التمويه
-                  spreadRadius: 2, // مدى انتشار الظل
-                  offset: Offset(0, 3), // اتجاه الظل للأسفل قليلًا
-                ),
-              ],
+              borderRadius: BorderRadius.circular(20),
+              color:Get.isDarkMode ? Theme.of(context).cardColor.withValues(alpha: .5) : Theme.of(context).primaryColor,
             ),
-            child: CartWidget(
-              color: Get.isDarkMode ? Theme.of(context).primaryColorLight : Colors.white,
-              size: 30,
-            ),
-          )
-          ,
-        ),
 
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-
-        bottomNavigationBar: ResponsiveHelper.isDesktop(context) ? const SizedBox() : Container(
-          padding: EdgeInsets.only(
-            top: Dimensions.paddingSizeDefault,
-            bottom: padding.bottom > 15 ? 0 : Dimensions.paddingSizeDefault,
-          ),
-          color:Get.isDarkMode ? Theme.of(context).cardColor.withValues(alpha: .5) : Theme.of(context).primaryColor,
-          child: SafeArea(
-            child: Padding( padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall),
+            child: Padding( padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall, vertical: Dimensions.paddingSizeSmall,),
               child: Row(children: [
 
                 _bnbItem(
@@ -120,16 +122,16 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                   },
                 ),
 
-                _bnbItem(
-                  icon: '', bnbItem: BnbItem.cart, context: context,
-                  onTap: () {
-                    if (!isUserLoggedIn) {
-                      Get.toNamed(RouteHelper.getSignInRoute(fromPage: RouteHelper.home));
-                    } else {
-                      Get.find<BottomNavController>().changePage(BnbItem.cart);
-                    }
-                  },
-                ),
+                // _bnbItem(
+                //   icon: '', bnbItem: BnbItem.cart, context: context,
+                //   onTap: () {
+                //     if (!isUserLoggedIn) {
+                //       Get.toNamed(RouteHelper.getSignInRoute(fromPage: RouteHelper.home));
+                //     } else {
+                //       Get.find<BottomNavController>().changePage(BnbItem.cart);
+                //     }
+                //   },
+                // ),
 
                 _bnbItem(
                   icon: Images.offerMenu, bnbItem: BnbItem.offers, context: context,

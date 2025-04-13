@@ -109,6 +109,7 @@ class SplashScreenState extends State<SplashScreen> {
 
               Image.asset(
                 Images.logo,
+                color: Theme.of(context).colorScheme.primary,
                 width: Dimensions.logoSize,
               ),
               const SizedBox(height: Dimensions.paddingSizeLarge),

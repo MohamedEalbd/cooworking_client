@@ -70,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Column( children: [
                       
                           Hero(tag: Images.logo,
-                            child: Image.asset(Images.logo, width: Dimensions.logoSize),
+                            child: Image.asset(Images.logo, width: Dimensions.logoSize, color: Theme.of(context).colorScheme.primary),
                           ),
                           SizedBox(height: manualLogin == 1 || otpLogin == 1 ? Dimensions.paddingSizeExtraMoreLarge : Dimensions.paddingSizeDefault),
                       
