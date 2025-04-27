@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:khidmh/feature/home/widget/nearby_provider_listview.dart';
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
@@ -91,9 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: homeAppBar(signInShakeKey: signInShakeKey),
+
+      //appBar: homeAppBar(signInShakeKey: signInShakeKey),
       endDrawer:ResponsiveHelper.isDesktop(context) ? const MenuDrawer() : null,
-      body: ResponsiveHelper.isDesktop(context) ? WebHomeScreen(scrollController: scrollController, availableServiceCount: availableServiceCount, signInShakeKey : signInShakeKey,) : SafeArea(
+      body: ResponsiveHelper.isDesktop(context)
+          ?
+      WebHomeScreen(scrollController: scrollController, availableServiceCount: availableServiceCount, signInShakeKey : signInShakeKey,)
+          :
+      SafeArea(
         child: RefreshIndicator(
           onRefresh: () async {
 
@@ -119,21 +125,119 @@ class _HomeScreenState extends State<HomeScreen> {
               child: GetBuilder<SplashController>(builder: (splashController){
                 return GetBuilder<ProviderBookingController>(builder: (providerController){
                   return GetBuilder<ServiceController>(builder: (serviceController){
-
                     bool isAvailableProvider = providerController.providerList != null && providerController.providerList!.isNotEmpty;
                     int ? providerBooking = splashController.configModel.content?.directProviderBooking;
                     bool isLtr = Get.find<LocalizationController>().isLtr;
-
                     return  CustomScrollView(
                       controller: scrollController,
                       physics: const AlwaysScrollableScrollPhysics(
                           parent: ClampingScrollPhysics()
                       ),
                       slivers: [
+                        SliverAppBar(
+                          titleSpacing: 0,
+                          expandedHeight: 170,
+                          flexibleSpace: PreferredSize(preferredSize:const Size(double.infinity, 350),
+                            child:
+                            Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(fit: BoxFit.cover,image: AssetImage(Images.bgAppBar))
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child:Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                spacing: 18,
+                                children: [
+                                  const SizedBox(height: 25),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(Images.titleLogo,height: 40,width: 224,),
+                                      const Spacer(),
+                                      Container(
+                                        height: 45,width: 45,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color:const Color(0xffFFFFFF).withOpacity(0.05),
+                                            shape: BoxShape.circle,
+                                            boxShadow:const [
+                                              BoxShadow(
+                                                color: Color(0xFF181F1F),
+                                                offset: Offset(2, 2),
+                                                blurRadius: 5,
+                                                spreadRadius: 1,
+                                              )
+                                            ]
+                                        ),
+                                        child:SvgPicture.asset(Images.bellRinging,height: 24,width: 24,),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: InkWell(
+                                        
+                                          onTap: () => Get.dialog(const SearchSuggestionDialog(), transitionCurve: Curves.easeIn),
+                                        
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                              left: Get.find<LocalizationController>().isLtr ? Dimensions.paddingSizeDefault : 0,
+                                              right:   Get.find<LocalizationController>().isLtr ? 0 : Dimensions.paddingSizeDefault,
+                                            ),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                             // boxShadow: Get.find<ThemeController>().darkTheme ? null : searchBoxShadow,
+                                             // borderRadius: BorderRadius.circular(Dimensions.paddingSizeExtraLarge),
+                                              color: const Color(0xff283435),
+                                            ),
+                                            child: Row( children: [
+
+                                              const SizedBox(width: Dimensions.paddingSizeExtraSmall,),
+                                              Text('search_services'.tr, style: robotoRegular.copyWith(color: Theme.of(context).hintColor)),
+                                              const Spacer(),
+                                              Container(height: 45, width: 45,
+                                                // decoration: BoxDecoration(
+                                                //     color: Theme.of(context).colorScheme.primary,shape: BoxShape.circle
+                                                // ),
+                                                margin: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall),
+                                                child: Padding(padding: const EdgeInsets.all(Dimensions.paddingSizeSmall + 3),
+                                                  child: Image.asset(Images.searchIcon),
+                                                ),
+                                              ),
+
+                                            ]),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8,),
+                                      //const Spacer(),
+                                      Container(
+                                          alignment: Alignment.center,
+                                          width: 127,
+                                           height: 45,
+                                          //padding:const EdgeInsets.symmetric(horizontal: 12,vertical: 16),
+                                          decoration: BoxDecoration(
+                                            color:const Color(0xFFFFDD00),
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: Text("registerAsAServiceProvider".tr,style: const TextStyle(color: Color(0xff181F1F),fontWeight: FontWeight.w500,fontSize: 12),)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
+                            ),
+
+                          ),
+                          ),
+                        ),
 
                         const SliverToBoxAdapter(child: SizedBox(height: Dimensions.paddingSizeSmall)),
 
-                        const HomeSearchWidget(),
+                       // const HomeSearchWidget(),
 
                         SliverToBoxAdapter(
                           child: Center(child: SizedBox(width: Dimensions.webMaxWidth, child: Column(children: [

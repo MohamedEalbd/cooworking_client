@@ -11,8 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if(ResponsiveHelper.isMobilePhone()) {
     HttpOverrides.global = MyHttpOverrides();
-    await FlutterDownloader.initialize(
-    );
+    await FlutterDownloader.initialize();
   }
   setPathUrlStrategy();
   // if(GetPlatform.isWeb){

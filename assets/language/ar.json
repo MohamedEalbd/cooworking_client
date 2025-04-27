@@ -54,7 +54,7 @@
   "resend_it": "أعد إرساله",
   "successfully_verified": "تم التحقق بنجاح!",
   "services_in": "الخدمات في",
-  "search_services": "ابحث عن اي خدمه...",
+  "search_services": "ابحث عن المساحات والخدمات",
   "all_categories": "خدماتنا",
   "all_services": "كل الخدمات",
   "see_all": "عرض الكل",
@@ -948,5 +948,8 @@
   "schedule_booking_currently_unavailable_for_this_provider": "حجز المواعيد غير متاح حاليًا لهذا المزود",
   "this_provider_have_not_permission_to_chat": "هذا المزود ليس لديه إذن للدردشة",
   "pick_current_location": "اختر الموقع الحالي",
-  "Unknown Location Found": "العثور على موقع غير معروف"
+  "Unknown Location Found": "العثور على موقع غير معروف",
+  "welcomeToCoworking" : "أهلا بك في كووركينغ",
+  "pleaseenteryourmobilenumbertologin" : "من فضلك أدخل رقم جوالك لتسجيل الدخول",
+  "registerAsAServiceProvider" : "سجل كمزود خدمة"
 }

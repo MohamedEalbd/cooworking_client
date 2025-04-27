@@ -18,20 +18,20 @@ class RecommendedServiceView extends StatelessWidget {
         else{
           if(serviceController.recommendedServiceList != null){
             return Container(
-              color: Get.isDarkMode ? Colors.grey.shade900 : Theme.of(context).hintColor.withValues(alpha: 0.1),
+              color: Get.isDarkMode ? Colors.grey.shade900 : Colors.transparent,
               height: height,
               child: Stack(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.15),
-                    child: Align(
-                      alignment: favButtonAlignment(),
-                      child: Opacity(
-                        opacity: 0.4,
-                        child: Image.asset(Images.recommendedServiceBg, fit: BoxFit.fitHeight,),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.15),
+                  //   child: Align(
+                  //     alignment: favButtonAlignment(),
+                  //     child: Opacity(
+                  //       opacity: 0.4,
+                  //       child: Image.asset(Images.recommendedServiceBg, fit: BoxFit.fitHeight,),
+                  //     ),
+                  //   ),
+                  // ),
                   Positioned(
                     left: 0,right: 0,bottom: 0,
                     child: Column(

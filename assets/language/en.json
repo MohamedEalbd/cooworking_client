@@ -948,5 +948,8 @@
   "schedule_booking_currently_unavailable_for_this_provider": "Schedule booking currently unavailable for this provider",
   "this_provider_have_not_permission_to_chat": "This provider does not have permission to chat",
   "pick_current_location": "Pick Current Location",
-  "Unknown Location Found": "Unknown Location Found"
+  "Unknown Location Found": "Unknown Location Found",
+  "welcomeToCoworking" : "Welcome to Coworking",
+  "pleaseenteryourmobilenumbertologin" : "Please enter your mobile number to log in.",
+  "registerAsAServiceProvider" : "Register as a service provider"
 }

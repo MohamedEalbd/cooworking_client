@@ -29,14 +29,14 @@ class HorizontalScrollServiceView extends GetView<ServiceController> {
             Container(height: isLtr ? 320 : 335,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.07),
-                image: DecorationImage(
-                  image: AssetImage(
-                   Images.popularServicesBackgroundImage
-                  ),
-                  fit: BoxFit.cover,
-                  opacity: 0.5
-                ),
+               // color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.07),
+               //  image: DecorationImage(
+               //    image: AssetImage(
+               //     Images.popularServicesBackgroundImage
+               //    ),
+               //    fit: BoxFit.cover,
+               //    opacity: 0.5
+               //  ),
               ),
             ): const SizedBox(),
 

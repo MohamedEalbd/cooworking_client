@@ -9,8 +9,9 @@ class CategoryView extends StatelessWidget {
     return GetBuilder<CategoryController>(builder: (categoryController) {
 
       return categoryController.categoryList != null && categoryController.categoryList!.isEmpty ? const SizedBox() :
-      categoryController.categoryList != null ? Center(
-        child: SizedBox(width: Dimensions.webMaxWidth,
+      categoryController.categoryList != null ?
+      Center(
+        child: SizedBox(width: Dimensions.webMaxWidth ,
           child: Padding(padding: const EdgeInsets.symmetric( vertical:Dimensions.paddingSizeDefault),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
 
@@ -31,69 +32,75 @@ class CategoryView extends StatelessWidget {
               GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: ResponsiveHelper.isDesktop(context) ? 10 : ResponsiveHelper.isTab(context) ? 6 : 4,
+                  crossAxisCount: ResponsiveHelper.isDesktop(context) ? 10 : ResponsiveHelper.isTab(context) ? 6 : 2,
                   crossAxisSpacing: Dimensions.paddingSizeSmall,
                   mainAxisSpacing: Dimensions.paddingSizeSmall,
-                  childAspectRatio: MediaQuery.of(context).size.width < 400 ? 0.85 : 0.95,
+                 // childAspectRatio: MediaQuery.of(context).size.width < 400 ? 0.85 : 0.95,
+                  childAspectRatio: 3/2,
                 ),
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: ResponsiveHelper.isDesktop(context) && categoryController.categoryList!.length > 10 ? 10
                     : ResponsiveHelper.isTab(context) &&  categoryController.categoryList!.length > 12 ? 12
-                    : ResponsiveHelper.isMobile(context) &&  categoryController.categoryList!.length > 8 ? 8
+                    : ResponsiveHelper.isMobile(context) &&  categoryController.categoryList!.length > 2 ? 2
                     : categoryController.categoryList!.length,
                 itemBuilder: (context, index) {
+
                   return TextHover(builder: (hovered){
-                    return Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color:  Get.find<ThemeController>().darkTheme ? Theme.of(context).cardColor : Theme.of(context).colorScheme.primary.withValues(alpha: hovered ? 0.1 : 0.06),
-                            borderRadius: const BorderRadius.all(Radius.circular(Dimensions.radiusDefault), ),
+                    return GestureDetector(
+                      onTap:(){
+                        Get.toNamed(RouteHelper.getCategoryProductRoute(
+                          categoryController.categoryList![index].id!, categoryController.categoryList![index].name!,
+                          index.toString(),
+                        ));
+                      },
+                      child: Container(
+                        height: 160,
+                        //alignment: Alignment.center,
+                        //padding:const EdgeInsets.symmetric(horizontal: 12,vertical: 48),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color:const Color(0xFFDFDFDF),width: 1,
                           ),
-                          child: Center(
-                            child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-
-                              SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeSmall + 3 : Dimensions.paddingSizeDefault,),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric( horizontal :  Dimensions.paddingSizeDefault),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-                                    child: CustomImage(
-                                      image: categoryController.categoryList?[index].imageFullPath ?? "",
-                                      fit: BoxFit.fitHeight, height: double.infinity, width:  double.infinity,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeExtraSmall  : Dimensions.paddingSizeDefault,),
-
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                                  child: Text(categoryController.categoryList![index].name!,
-                                    style: robotoRegular.copyWith(
-                                      fontSize: Dimensions.fontSizeSmall,
-                                      height: 1.3,
-                                      color: hovered ? Theme.of(context).colorScheme.primary :
-                                      Theme.of(context).textTheme.bodySmall?.color,
-                                    ),
-                                    maxLines: 2, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeExtraSmall  : Dimensions.paddingSizeDefault,),
-
-                            ]),
+                          color:  Get.find<ThemeController>().darkTheme ? Theme.of(context).cardColor : Colors.white,//Theme.of(context).colorScheme.primary.withValues(alpha: hovered ? 0.1 : 0.06)
+                          borderRadius: const BorderRadius.all(Radius.circular(8),
                           ),
                         ),
-                        Positioned.fill(child: RippleButton(onTap: (){
-                          Get.toNamed(RouteHelper.getCategoryProductRoute(
-                            categoryController.categoryList![index].id!, categoryController.categoryList![index].name!,
-                            index.toString(),
-                          ));
-                        }))
-                      ],
+                        child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+
+                          SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeSmall + 3 : Dimensions.paddingSizeDefault,),
+                          Expanded(
+                            flex: 3,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric( horizontal :  Dimensions.paddingSizeDefault),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
+                                child: CustomImage(
+                                  image: categoryController.categoryList?[index].imageFullPath ?? "",
+                                  fit: BoxFit.fitHeight,height: 50,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeExtraSmall  : Dimensions.paddingSizeDefault,),
+
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              child: Text(categoryController.categoryList![index].name!,
+                                style: robotoRegular.copyWith(
+                                  fontSize: Dimensions.fontSizeSmall,
+                                  height: 1.3,
+                                  color: hovered ? Theme.of(context).colorScheme.primary :
+                                  Theme.of(context).textTheme.bodySmall?.color,
+                                ),
+                                maxLines: 2, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: (ResponsiveHelper.isMobile(context) || ( kIsWeb && hovered) ) ?  Dimensions.paddingSizeExtraSmall  : Dimensions.paddingSizeDefault,),
+
+                        ]),
+                      ),
                     );
                   });
                 },
@@ -105,8 +112,10 @@ class CategoryView extends StatelessWidget {
     });
   }
 }
-
-
+// Positioned.fill(child: RippleButton(onTap: (){
+//
+// }))
+//
 
 class CategoryShimmer extends StatelessWidget {
   final bool? fromHomeScreen;

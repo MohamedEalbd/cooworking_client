@@ -25,8 +25,9 @@ class _FeatheredCategoryViewState extends State<FeatheredCategoryView> {
                 : serviceController.categoryList![categoryIndex].servicesByCategory!.length;
 
           return  Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withValues(alpha: 0.05),
+            decoration: const BoxDecoration(
+              color: Colors.transparent,
+              // color: Theme.of(context).primaryColor.withValues(alpha: 0.05),
             ),
             margin: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeExtraSmall),
             padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall,horizontal: 0),

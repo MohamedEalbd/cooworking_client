@@ -22,6 +22,7 @@ dependencies:
   url_strategy: ^0.3.0
   image_picker: ^1.1.2
   cached_network_image: ^3.4.1
+  flutter_svg:
   google_maps_flutter: ^2.10.0
   geolocator: ^13.0.2
   url_launcher: ^6.3.1

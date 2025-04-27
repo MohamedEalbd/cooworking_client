@@ -12,9 +12,10 @@ class BannerView extends StatelessWidget {
         return (bannerController.banners != null && bannerController.banners!.isEmpty) ?
         const SizedBox() :
         Container(width: MediaQuery.of(context).size.width,
-          height: ResponsiveHelper.isTab(context) || MediaQuery.of(context).size.width > 450 ? 350 : MediaQuery.of(context).size.width * 0.42,
+          height: ResponsiveHelper.isTab(context) || MediaQuery.of(context).size.width > 450 ? 350 : 151,
           padding: const EdgeInsets.only(top: Dimensions.paddingSizeDefault),
-          child: bannerController.banners != null ? Column(
+          child: bannerController.banners != null ?
+          Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
@@ -77,7 +78,8 @@ class BannerView extends StatelessWidget {
                 ),
               ): const SizedBox(),
             ],
-          ) : Padding(padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
+          ) :
+          Padding(padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
             child: Column(
               children: [
                 Expanded(

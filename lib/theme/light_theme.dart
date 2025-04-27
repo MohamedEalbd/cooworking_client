@@ -8,7 +8,7 @@ ThemeData light = ThemeData(
   primaryColorDark: const Color(0xFF10324A),
   secondaryHeaderColor: const Color(0xFF758493),
   disabledColor: const Color(0xFF8797AB),
-  scaffoldBackgroundColor: const Color(0xfff5f7f7),
+  scaffoldBackgroundColor: const Color(0xffF5F7F7),
   brightness: Brightness.light,
   hintColor: const Color(0xFFA4A4A4),
   focusColor: const Color(0xFFFFF9E5),
@@ -32,7 +32,7 @@ ThemeData light = ThemeData(
     ),
   ),
   colorScheme: const ColorScheme.light(
-    primary: const Color(0xFF181F1F),
+    primary: const Color(0xFF1B7B9C),//const Color(0xFF181F1F),
     secondary: Color(0xFFFF9900),
     tertiary: Color(0xFFd35221),
     onSecondaryContainer: Color(0xFF02AA05),

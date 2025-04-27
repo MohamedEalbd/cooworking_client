@@ -16,7 +16,8 @@ class HighlightProviderWidget extends StatelessWidget {
       return advertisementController.advertisementList != null &&  advertisementController.advertisementList!.isNotEmpty ? Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-          color: Theme.of(context).colorScheme.primary.withValues(alpha: Get.isDarkMode ? 0.2 : 0.1),
+         color: const Color(0xffF5F7F7)
+         // color: Theme.of(context).colorScheme.primary.withValues(alpha: Get.isDarkMode ? 0.2 : 0.1),
         ),
         child: Stack( alignment: Get.find<LocalizationController>().isLtr ? Alignment.topRight : Alignment.topLeft,children: [
           Padding(padding: const EdgeInsets.symmetric(vertical : Dimensions.paddingSizeDefault),

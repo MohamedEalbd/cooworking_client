@@ -1,6 +1,12 @@
 class Images {
+  static String get bgAppBar => 'img_appBar'.png;
+  static String get titleLogo => 'title_logo3'.svg;
+  static String get bellRinging => 'BellRinging'.svg;
   static String get logo => 'logo'.png;
+  static String get logoWithName => 'logo_with_name'.png;
+  static String get newSearchIcon => 'search_icon'.svg;
   static String get webAppbarLogo => 'logo'.png;
+  static String get back_ground_img => 'back_ground_img'.jpg;
   static String get placeholder => 'placeholder'.jpg;
   static String get emptyService => 'empty_service'.png;
   static String get emptyProvider => 'empty_provider'.png;
@@ -8,6 +14,7 @@ class Images {
   static String get emptyCart => 'empty_cart'.png;
   static String get emptyNotification => 'empty_notification'.png;
   static String get favorite => 'favorite'.png;
+  static String get backGroundIma => 'back_ground_ima'.png;
   static String get unFavorite => 'unfavorite'.png;
   static String get emptyAddress => 'empty_address'.png;
   static String get cart => 'cart'.png;
@@ -201,5 +208,6 @@ class Images {
 extension on String {
   String get png => 'assets/images/$this.png';
   String get jpg => 'assets/images/$this.jpg';
+  String get svg => 'assets/images/$this.svg';
   String get json => 'assets/json/$this.json';
 }

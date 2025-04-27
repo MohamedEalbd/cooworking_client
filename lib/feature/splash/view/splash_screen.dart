@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
 
@@ -98,25 +99,42 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _globalKey,
-      body: GetBuilder<SplashController>(builder: (splashController) {
-        PriceConverter.getCurrency();
-        return Center(
-          child: splashController.hasConnection ? Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
+    return Stack(
+      children: [
+        ColorFiltered(
+          colorFilter: const ColorFilter.mode(
+            Color(0xff181F1F), // اللون اللي عايز تطبقه
+            BlendMode.modulate, // خلي الخطوط تاخد لون جديد
+          ),
+          child: Image.asset(
+            Images.back_ground_img,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          key: _globalKey,
+          body: GetBuilder<SplashController>(builder: (splashController) {
+            PriceConverter.getCurrency();
+            return Center(
+              child: splashController.hasConnection ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
 
-              Image.asset(
-                Images.logo,
-                color: Theme.of(context).colorScheme.primary,
-                width: Dimensions.logoSize,
-              ),
-              const SizedBox(height: Dimensions.paddingSizeLarge),
-            ],
-          ) : NoInternetScreen(child: SplashScreen(body: widget.body)),
-        );
-      }),
+                  SvgPicture.asset(
+                    Images.titleLogo,
+                   // color: Theme.of(context).colorScheme.primary,
+                    width: Dimensions.logoSize,
+                  ),
+                  const SizedBox(height: Dimensions.paddingSizeLarge),
+                ],
+              ) : NoInternetScreen(child: SplashScreen(body: widget.body)),
+            );
+          }),
+        ),
+      ],
     );
   }
 

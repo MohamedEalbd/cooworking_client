@@ -20,48 +20,71 @@ class AddressAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () => Navigator.pop(context),
       ):
       const SizedBox(),
-      title: Row(
-          children: [
-            Expanded(
-              child: InkWell(
-                hoverColor: Colors.transparent,
-                onTap: (){
-                  Get.toNamed(RouteHelper.getAccessLocationRoute('address'));
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('services_in'.tr, style: robotoRegular.copyWith(color:Get.isDarkMode?Colors.white: Colors.black, fontSize: Dimensions.fontSizeExtraSmall)),
-                    const SizedBox(height: Dimensions.paddingSizeExtraSmall),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeSmall : 0,),
-                      child: GetBuilder<LocationController>(builder: (locationController) {
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            if(locationController.getUserAddress() != null)
-                              Flexible(
-                                child: Text(
-                                  locationController.getUserAddress()!.address!,
-                                  style: robotoRegular.copyWith(color: Get.isDarkMode?Colors.white: Colors.black, fontSize: Dimensions.fontSizeSmall),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            Icon(Icons.arrow_forward_ios_rounded, color: Get.isDarkMode?Colors.white: Colors.black, size: 12),
-                          ],
-                        );
-                      }),
-                    ),
-                  ],),
+      title: Container(
+        height: 100,
+        decoration: BoxDecoration(
+         // image: DecorationImage(image: AssetImage(Images.bgAppBar)),
+        ),
+        child: Container(
+          width: double.infinity,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Image.asset(Images.titleLogo),
+                      Text("",),
+                    ],
+                  )
+                ],
               ),
-            ),
-            InkWell(
-                hoverColor: Colors.transparent,
-                onTap: () => Get.toNamed(RouteHelper.getNotificationRoute()),
-                child:   Icon(Icons.notifications, size: 25, color: Get.isDarkMode?Colors.white: Colors.black)),
-          ]),
+            ],
+          ),
+        ),
+      ),
+      // Row(
+      //     children: [
+      //       Expanded(
+      //         child: InkWell(
+      //           hoverColor: Colors.transparent,
+      //           onTap: (){
+      //             Get.toNamed(RouteHelper.getAccessLocationRoute('address'));
+      //           },
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             children: [
+      //               Text('services_in'.tr, style: robotoRegular.copyWith(color:Get.isDarkMode?Colors.white: Colors.black, fontSize: Dimensions.fontSizeExtraSmall)),
+      //               const SizedBox(height: Dimensions.paddingSizeExtraSmall),
+      //               Padding(
+      //                 padding: EdgeInsets.symmetric(horizontal: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeSmall : 0,),
+      //                 child: GetBuilder<LocationController>(builder: (locationController) {
+      //                   return Row(
+      //                     crossAxisAlignment: CrossAxisAlignment.center,
+      //                     mainAxisAlignment: MainAxisAlignment.start,
+      //                     children: [
+      //                       if(locationController.getUserAddress() != null)
+      //                         Flexible(
+      //                           child: Text(
+      //                             locationController.getUserAddress()!.address!,
+      //                             style: robotoRegular.copyWith(color: Get.isDarkMode?Colors.white: Colors.black, fontSize: Dimensions.fontSizeSmall),
+      //                             maxLines: 1,
+      //                             overflow: TextOverflow.ellipsis,
+      //                           ),
+      //                         ),
+      //                       Icon(Icons.arrow_forward_ios_rounded, color: Get.isDarkMode?Colors.white: Colors.black, size: 12),
+      //                     ],
+      //                   );
+      //                 }),
+      //               ),
+      //             ],),
+      //         ),
+      //       ),
+      //       InkWell(
+      //           hoverColor: Colors.transparent,
+      //           onTap: () => Get.toNamed(RouteHelper.getNotificationRoute()),
+      //           child:   Icon(Icons.notifications, size: 25, color: Get.isDarkMode?Colors.white: Colors.black)),
+      //     ]),
     );
   }
 
