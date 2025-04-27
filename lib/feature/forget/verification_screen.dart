@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
 
@@ -53,89 +54,114 @@ class VerificationScreenState extends State<VerificationScreen> {
 
     double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      endDrawer:ResponsiveHelper.isDesktop(context) ? const MenuDrawer():null,
-      appBar: CustomAppBar(title: 'otp_verification'.tr),
-      body: SafeArea(child: FooterBaseView(
-        isCenter:true,
-        child: WebShadowWrap(
-          child: Scrollbar(child: SizedBox(
-            height: ResponsiveHelper.isDesktop(context) ? MediaQuery.of(context).size.height * 0.7 : MediaQuery.of(context).size.height-130,
-            child: Center(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal:Dimensions.paddingSizeLarge),
-                child: GetBuilder<AuthController>(builder: (authController) {
-                  return Padding(
+    return Stack(
+      children: [
+        ColorFiltered(
+          colorFilter: const ColorFilter.mode(
+            Color(0xff181F1F), // اللون اللي عايز تطبقه
+            BlendMode.modulate, // خلي الخطوط تاخد لون جديد
+          ),
+          child: Image.asset(
+            Images.back_ground_img,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          endDrawer:ResponsiveHelper.isDesktop(context) ? const MenuDrawer():null,
+         // appBar: CustomAppBar(title: 'otp_verification'.tr),
+          body: SafeArea(child: Center(
+            child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+         // padding: const EdgeInsets.symmetric(horizontal:Dimensions.paddingSizeLarge),
+          child: GetBuilder<AuthController>(builder: (authController) {
+            return Column(
+              children: [
+                const SizedBox(height: 70,),
+                SvgPicture.asset(Images.titleLogo, width: 280),
+                const SizedBox(height: 55,),
+                Container(
+                  height: Dimensions.webMaxWidth / 2,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(16),topLeft: Radius.circular(16))
+                  ),
+                  child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: ResponsiveHelper.isDesktop(context)?Dimensions.webMaxWidth/3.5:
-                        ResponsiveHelper.isTab(context)? Dimensions.webMaxWidth/5.5 : 0
+                        ResponsiveHelper.isTab(context)? Dimensions.webMaxWidth/5.5 :  Dimensions.paddingSizeLarge
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        // padding: EdgeInsets.symmetric(
+                        //     horizontal: ResponsiveHelper.isDesktop(context)?Dimensions.webMaxWidth/3.5:
+                        //     ResponsiveHelper.isTab(context)? Dimensions.webMaxWidth/5.5 : 0
+                        // ),
 
-                      Image.asset(Images.logo, width: 140),
-                      const SizedBox(height: Dimensions.paddingSizeDefault,),
+                        const SizedBox(height: Dimensions.paddingSizeDefault,),
 
                         Get.find<SplashController>().configModel.content?.appEnvironment == "demo" ? Text(
                           'for_demo_purpose'.tr, style: robotoRegular,
                         ) : RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          style: DefaultTextStyle.of(context).style,
-                          children: [
-                            TextSpan(text: 'we_have_sent_a_verification_code_to'.tr, style: robotoRegular.copyWith(
-                              color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.5),
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: DefaultTextStyle.of(context).style,
+                            children: [
+                              TextSpan(text: 'we_have_sent_a_verification_code_to'.tr, style: robotoRegular.copyWith(
+                                color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.5),
 
-                            )),
-                            TextSpan(text: StringParser.obfuscateMiddle(_identity??""), style: robotoMedium.copyWith(
-                              color: Theme.of(context).textTheme.bodyLarge!.color,)
-                            ),
-                            // const TextSpan(text: "\n"),
-                            // TextSpan(text: 'otp_will_be_expire'.tr, style: ubuntuRegular.copyWith(
-                            //     color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.5),
-                            //   height: 2,
-                            // )),
+                              )),
+                              TextSpan(text: StringParser.obfuscateMiddle(_identity??""), style: robotoMedium.copyWith(
+                                color: Theme.of(context).textTheme.bodyLarge!.color,)
+                              ),
+                              // const TextSpan(text: "\n"),
+                              // TextSpan(text: 'otp_will_be_expire'.tr, style: ubuntuRegular.copyWith(
+                              //     color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.5),
+                              //   height: 2,
+                              // )),
 
-                          ],
-                        ),
-                      ),
-
-                      const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge,),
-
-                      Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: PinCodeTextField(
-                          length: 6,
-                          appContext: context,
-                          keyboardType: TextInputType.number,
-                          animationType: AnimationType.slide,
-                          pinTheme: PinTheme(
-                            shape: PinCodeFieldShape.box,
-                            fieldHeight: ResponsiveHelper.isMobile(context) ? width/9 : 60,
-                            fieldWidth: ResponsiveHelper.isMobile(context) ? width/9 : 60,
-                            borderWidth: 0.5,
-                            activeBorderWidth: 0.5,
-                            inactiveBorderWidth: 0.5,
-                            errorBorderWidth: 0.5,
-                            borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
-                            selectedColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error.withValues(alpha: 0.5) : Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
-                            selectedFillColor: Get.isDarkMode?Colors.grey.withValues(alpha: 0.6):Colors.white,
-                            inactiveFillColor: Theme.of(context).cardColor,
-                            inactiveColor: Theme.of(context).colorScheme.primary.withValues(alpha: Get.isDarkMode ?  0.7 : 0.2),
-                            activeColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.primary.withValues(alpha: 0.4),
-                            activeFillColor: Theme.of(context).cardColor,
+                            ],
                           ),
-                          animationDuration: const Duration(milliseconds: 300),
-                          backgroundColor: Colors.transparent,
-                          enableActiveFill: true,
-                          onChanged: authController.updateVerificationCode,
-                          beforeTextPaste: (text) => true,
-                          pastedTextStyle: robotoRegular.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color),
-                          textStyle: robotoMedium,
                         ),
-                      ),
+
+                        const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge,),
+
+                        Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: PinCodeTextField(
+                            length: 6,
+                            appContext: context,
+                            keyboardType: TextInputType.number,
+                            animationType: AnimationType.slide,
+                            pinTheme: PinTheme(
+                              shape: PinCodeFieldShape.box,
+                              fieldHeight: ResponsiveHelper.isMobile(context) ? width/9 : 60,
+                              fieldWidth: ResponsiveHelper.isMobile(context) ? width/9 : 60,
+                              borderWidth: 0.5,
+                              activeBorderWidth: 0.5,
+                              inactiveBorderWidth: 0.5,
+                              errorBorderWidth: 0.5,
+                              borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
+                              selectedColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error.withValues(alpha: 0.5) : Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                              selectedFillColor: Get.isDarkMode?Colors.grey.withValues(alpha: 0.6):Colors.white,
+                              inactiveFillColor: Theme.of(context).cardColor,
+                              inactiveColor: Theme.of(context).colorScheme.primary.withValues(alpha: Get.isDarkMode ?  0.7 : 0.2),
+                              activeColor: authController.isWrongOtpSubmitted ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.primary.withValues(alpha: 0.4),
+                              activeFillColor: Theme.of(context).cardColor,
+                            ),
+                            animationDuration: const Duration(milliseconds: 300),
+                            backgroundColor: Colors.transparent,
+                            enableActiveFill: true,
+                            onChanged: authController.updateVerificationCode,
+                            beforeTextPaste: (text) => true,
+                            pastedTextStyle: robotoRegular.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color),
+                            textStyle: robotoMedium,
+                          ),
+                        ),
 
                         authController.isWrongOtpSubmitted ? Text('incorrect_otp'.tr,
                           style: robotoRegular.copyWith(color: Theme.of(context).colorScheme.error),
@@ -186,15 +212,17 @@ class VerificationScreenState extends State<VerificationScreen> {
                               fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).colorScheme.primary,)),
                           ),
                         ]) : const SizedBox(),
-                      const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge,),
-                    ],),
-                  );
-                }),
-              ),
-            ),
-          )),
+                        const SizedBox(height: Dimensions.paddingSizeExtraMoreLarge,),
+                      ],),
+                  ),
+                ),
+              ],
+            );
+          }),
+                            ),
+                          )),
         ),
-      )),
+      ],
     );
   }
   void _otpVerify(String identity,String identityType,String otp, AuthController authController) async {

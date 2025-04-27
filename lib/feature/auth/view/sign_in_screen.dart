@@ -38,15 +38,6 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Stack(
         children: [
 
-          // Positioned.fill(
-          //   child: ImageFiltered(
-          //     imageFilter: ImageFilter.blur(sigmaX: 0, sigmaY: 0), // تقريبي لـ 12% blur
-          //     child: Image.asset(
-          //       "assets/images/back_ground_ima.png",
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
           ColorFiltered(
             colorFilter: const ColorFilter.mode(
               Color(0xff181F1F), // اللون اللي عايز تطبقه
