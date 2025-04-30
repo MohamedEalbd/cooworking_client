@@ -97,8 +97,8 @@ class NewServiceWidget extends StatelessWidget {
                       SvgPicture.asset(Images.location_icon),
                       const SizedBox(width: 4),
                       const Expanded(child:  Text('جدة',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: Color(0xff6C757D)),)),
-                      const Spacer(),
-                      SvgPicture.asset(Images.radio_button),
+                      //const Spacer(),
+                      Expanded(child: SvgPicture.asset(Images.radio_button)),
                       const SizedBox(width: 4),
                       const Expanded(child:  Text('2 - 8 م',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: Color(0xff6C757D)),)),
 
