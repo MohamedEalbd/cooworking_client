@@ -22,7 +22,7 @@ class PersonViewVertical extends StatelessWidget {
               child: TitleWidget(
                 textDecoration: TextDecoration.underline,
                 title:'bestRated'.tr,
-                onTap: () => Get.toNamed(RouteHelper.getNearByProviderScreen(tabIndex: 0)),
+               // onTap: () => Get.toNamed(RouteHelper.getNearByProviderScreen(tabIndex: 0)),
               ),
             ),
             // SizedBox( height:  Get.find<LocalizationController>().isLtr ? 160 : 180,
@@ -59,19 +59,19 @@ class PersonViewVertical extends StatelessWidget {
                     crossAxisCount: ResponsiveHelper.isDesktop(context) ? 5 : ResponsiveHelper.isTab(context) ? 3 : 2 ),
                 shrinkWrap: true, // يخليه ياخد ارتفاع العناصر فقط
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: providerBookingController.providerList?.length,
+                itemCount: providerBookingController.providerIndependentList?.length,
                 itemBuilder: (context, index){
                   return Padding(padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeLarge),
                     child: SizedBox(
                       width: ResponsiveHelper.isDesktop(context) ? Dimensions.webMaxWidth / 3.2 : ResponsiveHelper.isTab(context)? Get.width/ 2.5 :  Get.width/1.16,
-                      child: PersonCard(providerData: providerBookingController.providerList![index],),
+                      child: PersonCard(providerData: providerBookingController.providerIndependentList![index],),
                       // child: NearbyProviderListItemView(providerData: providerBookingController.providerList![index], index: index, signInShakeKey: signInShakeKey,),
                     ),
                   );
                 },
               ),
             ),
-          ]) :  providerBookingController.providerList != null && providerBookingController.providerList!.isEmpty ? const SizedBox() :
+          ]) :  providerBookingController.providerIndependentList != null && providerBookingController.providerIndependentList!.isEmpty ? const SizedBox() :
           HomeRecommendedProviderShimmer(height: height,);
 
         });

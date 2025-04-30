@@ -14,7 +14,7 @@ class CustomImage extends StatelessWidget {
     return kIsWeb ? Image.network(image!, height: height, width: width, fit: fit, errorBuilder: (context, error, stackTrace) {
       return Image.asset(placeholder ?? Images.placeholder, height: height, width: width, fit: placeHolderBoxFit ?? fit);
     }) : CachedNetworkImage(
-      imageUrl: image! , height: height, width: width, fit: fit,
+      imageUrl: image! , height: height, width: width, fit: fit, filterQuality: FilterQuality.high, // يمنع التبكسل
       placeholder: (context, url) => Image.asset(placeholder ?? Images.placeholder, height: height, width: width, fit: placeHolderBoxFit ?? fit),
       errorWidget: (context, url, error) => Image.asset(placeholder ?? Images.placeholder, height: height, width: width, fit: placeHolderBoxFit ?? fit),
     );

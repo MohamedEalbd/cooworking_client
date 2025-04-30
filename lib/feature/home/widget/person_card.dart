@@ -31,36 +31,36 @@ class PersonCard extends StatelessWidget {
           ClipOval(
             child: CustomImage(
              image:  "${providerData!.logoFullPath}", // مسار اللوجو
-              fit: BoxFit.cover,height: 80,width: 80,
+              fit: providerData!.logoFullPath != null ? BoxFit.contain : BoxFit.cover,height: 80,width: 80,
             ),
           ),
           const SizedBox(height: 8),
 
           // الاسم
            Text(
-            providerData!.contactPersonName ?? "",maxLines: 1,
+            providerData!.companyName ?? "",maxLines: 1,
             style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14,color: Color(0xff181F1F)),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
 
           // التخصص والسعر
-           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Text(
-                  providerData!.companyName ?? "",maxLines: 1,
-                  style:const TextStyle(fontSize: 12, color: Color(0xff6C757D),fontWeight: FontWeight.w500),
-                ),
-              ),
-              const SizedBox(width: 8),
-              const  Text(
-                '20 ر.س/ساعة',
-                style: TextStyle(fontSize: 12, color: Color(0xff6C757D),fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
+          //  Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Expanded(
+          //       child: Text(
+          //         providerData!.contactPersonName ?? "",maxLines: 1,
+          //         style:const TextStyle(fontSize: 12, color: Color(0xff6C757D),fontWeight: FontWeight.w500),
+          //       ),
+          //     ),
+          //     const SizedBox(width: 8),
+          //     // const  Text(
+          //     //   '20 ر.س/ساعة',
+          //     //   style: TextStyle(fontSize: 12, color: Color(0xff6C757D),fontWeight: FontWeight.w500),
+          //     // ),
+          //   ],
+          // ),
           const SizedBox(height: 4),
 
           // سنوات الخبرة

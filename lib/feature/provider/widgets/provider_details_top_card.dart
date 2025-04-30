@@ -189,26 +189,26 @@ class _ReviewInfoCard extends StatelessWidget {
             )),
           ]),
         ),
-        Container(
-          width: 1,height: 30,
-          margin: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall),
-          decoration: BoxDecoration(
-            color: Theme.of(context).hintColor.withValues(alpha: 0.5),
-          ),
-        ),
-        Column(children: [
-          Text('${providerDetails.totalServiceServed ?? "0"}',
-            style:  robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge),
-          ),
-          const SizedBox(height: Dimensions.paddingSizeTine),
-
-          Text('services_provided'.tr,
-            style:  robotoRegular.copyWith(
-              fontSize: Dimensions.fontSizeDefault,
-              color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.6),
-            ),
-          ),
-        ]),
+        // Container(
+        //   width: 1,height: 30,
+        //   margin: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall),
+        //   decoration: BoxDecoration(
+        //     color: Theme.of(context).hintColor.withValues(alpha: 0.5),
+        //   ),
+        // ),
+        // Column(children: [
+        //   Text('${providerDetails.totalServiceServed ?? "0"}',
+        //     style:  robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge),
+        //   ),
+        //   const SizedBox(height: Dimensions.paddingSizeTine),
+        //
+        //   Text('services_provided'.tr,
+        //     style:  robotoRegular.copyWith(
+        //       fontSize: Dimensions.fontSizeDefault,
+        //       color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.6),
+        //     ),
+        //   ),
+        // ]),
         const SizedBox(),
       ]),
     );

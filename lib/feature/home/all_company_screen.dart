@@ -46,7 +46,7 @@ class _AllCompanyScreenState extends State<AllCompanyScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
                       child: GetBuilder<NearbyProviderController>(
                         builder: (providerBookingController) {
-                          return GridView.builder(
+                          return providerBookingController.providerList != null ?GridView.builder(
                             key: UniqueKey(),
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisSpacing: Dimensions.paddingSizeDefault,
@@ -66,7 +66,7 @@ class _AllCompanyScreenState extends State<AllCompanyScreen> {
                                 ),
                               );
                             },
-                          );
+                          ) : Container();
                         }
                       ),
                     ): const SizedBox(),

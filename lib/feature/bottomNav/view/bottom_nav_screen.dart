@@ -133,10 +133,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                 //   },
                 // ),
 
-                _bnbItem(
-                  icon: Images.offerMenu, bnbItem: BnbItem.offers, context: context,
-                  onTap: () => Get.find<BottomNavController>().changePage(BnbItem.offers),
-                ),
+                // _bnbItem(
+                //   icon: Images.offerMenu, bnbItem: BnbItem.offers, context: context,
+                //   onTap: () => Get.find<BottomNavController>().changePage(BnbItem.offers),
+                // ),
 
                 _bnbItem(
                   icon: Images.menu, bnbItem: BnbItem.more,context: context,

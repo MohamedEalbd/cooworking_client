@@ -24,6 +24,7 @@ class HomeScreen extends StatefulWidget {
         Get.find<ServiceController>().getTrendingServiceList(1,reload),
         Get.find<ProviderBookingController>().getProviderList(1,reload),
         Get.find<NearbyProviderController>().getProviderList(1,reload),
+        Get.find<NearbyProviderController>().getProviderIndependentList(1,reload),
         Get.find<CampaignController>().getCampaignList(reload),
         Get.find<ServiceController>().getRecommendedServiceList(1, reload),
         Get.find<CheckOutController>().getOfflinePaymentMethod(false, shouldUpdate: false),

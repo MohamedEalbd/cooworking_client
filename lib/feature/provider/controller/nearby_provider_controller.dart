@@ -22,6 +22,9 @@ class NearbyProviderController extends GetxController implements GetxService {
   List<ProviderData>? _providerList;
   List<ProviderData>? get  providerList=> _providerList;
 
+  List<ProviderData>? _providerIndependentList;
+  List<ProviderData>? get  providerIndependentList=> _providerIndependentList;
+
   final List<PredictionModel> _predictionList = [];
   PredictionModel? _firstPredictionModel;
 
@@ -60,7 +63,7 @@ class NearbyProviderController extends GetxController implements GetxService {
 
   bool isPopupMenuOpened = false;
 
-  Future<void> getProviderList(int offset, bool reload, {bool applyFilter = false, LatLng? initialPosition}) async {
+  Future<void> getProviderList(int offset, bool reload, {bool applyFilter = false, LatLng? initialPosition}) async  {
 
     if(offset != 1 || _providerModel == null || reload){
       if(reload){
@@ -93,6 +96,7 @@ class NearbyProviderController extends GetxController implements GetxService {
             _providerModel = ProviderModel.fromJson(data);
             _providerList = [];
             _providerList!.addAll(ProviderModel.fromJson(data).content?.data??[]);
+
             _sortProviderListAndInitMap(initialPosition: initialPosition);
             update();
           },
@@ -118,15 +122,80 @@ class NearbyProviderController extends GetxController implements GetxService {
       }
     }
   }
+  Future<void> getProviderIndependentList(int offset, bool reload, {bool applyFilter = false, LatLng? initialPosition}) async  {
+
+    if(offset != 1 || _providerModel == null || reload){
+      if(reload){
+        _providerModel = null;
+      }
+
+      if(!applyFilter){
+        clearFilterDataValues(shouldUpdate: false);
+      }
+      Map<String,dynamic> body={
+        'sort_by': _selectedSortBy ,
+         "rating" : _selectedRating ?? "0",
+        "type" : "Independent"
+      };
+
+      if(selectedCategoryId.isNotEmpty){
+        body.addAll({'category_ids': selectedCategoryId});
+      }
+
+      if(_providerAvailableStatus !=null){
+        body.addAll({'service_availability': _providerAvailableStatus});
+      }
+
+
+      if(offset == 1){
+
+        await DataSyncHelper.fetchAndSyncData(
+          fetchFromLocal: ()=> providerBookingRepo.getProviderList<CacheResponseData>( offset, body, source: DataSourceEnum.local, limit: 100),
+          fetchFromClient: ()=> providerBookingRepo.getProviderList( offset, body, source: DataSourceEnum.client, limit: 100),
+          onResponse: (data, source) {
+            _providerModel = ProviderModel.fromJson(data);
+            _providerIndependentList = [];
+            _providerIndependentList!.addAll(ProviderModel.fromJson(data).content?.data??[]);
+
+            _sortProviderListAndInitMap(initialPosition: initialPosition);
+            update();
+          },
+        );
+
+      }else{
+        ApiResponseModel response = await providerBookingRepo.getProviderList(offset,body, limit: 100, source: DataSourceEnum.client);
+        if (response.response.statusCode == 200) {
+          if(reload){
+            _providerIndependentList = [];
+          }
+          _providerModel = ProviderModel.fromJson(response.response);
+          if(_providerModel != null ){
+            _providerIndependentList!.addAll(ProviderModel.fromJson(response.response).content?.data??[]);
+          }
+          _sortProviderListAndInitMap(initialPosition: initialPosition);
+
+        } else {
+          ApiChecker.checkApi(response.response);
+        }
+
+        update();
+      }
+    }
+  }
 
   _sortProviderListAndInitMap({ LatLng? initialPosition}){
     _providerList?.forEach((element) {
       double distance = MapHelper.getDistanceBetweenUserCurrentLocationAndProvider(Get.find<LocationController>().getUserAddress()!, element);
       element.distance = distance;
     });
+    _providerIndependentList?.forEach((element) {
+      double distance = MapHelper.getDistanceBetweenUserCurrentLocationAndProvider(Get.find<LocationController>().getUserAddress()!, element);
+      element.distance = distance;
+    });
 
     if(_selectedSortBy == "default"){
       _providerList?.sort((a, b) => a.distance!.compareTo(b.distance!));
+      _providerIndependentList?.sort((a, b) => a.distance!.compareTo(b.distance!));
     }
     selectedProviderIndex = -1;
 
@@ -144,6 +213,7 @@ class NearbyProviderController extends GetxController implements GetxService {
 
     _apiHitCount ++;
     updateIsFavoriteValue(_providerList?[index].isFavorite == 1 ? 0 : 1,providerId);
+    updateIsFavoriteValue(_providerIndependentList?[index].isFavorite == 1 ? 0 : 1,providerId);
     update();
     Response response = await providerBookingRepo.updateIsFavoriteStatus(serviceId: providerId);
 
@@ -165,9 +235,14 @@ class NearbyProviderController extends GetxController implements GetxService {
   updateIsFavoriteValue(int status, String providerId, {bool shouldUpdate = false, bool fromExploreProviderScreen = true}){
 
     int? index = _providerList?.indexWhere((element) => element.id == providerId);
+    int? indexInd = _providerIndependentList?.indexWhere((element) => element.id == providerId);
     if(index !=null && index > -1){
       _providerList?[index].isFavorite = status;
     }
+    if(indexInd !=null && indexInd > -1){
+      _providerIndependentList?[indexInd].isFavorite = status;
+    }
+
 
     if(fromExploreProviderScreen){
       Get.find<ProviderBookingController>().updateProviderIsFavoriteValue(status, providerId, shouldUpdate: true, fromProviderBooking: false);

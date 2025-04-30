@@ -242,7 +242,8 @@ class _CartScreenState extends State<CartScreen> {
                                                 subcategoryId: cartController.cartList.first.subCategoryId,
                                               ),);
                                             },
-                                            child: const UnselectedProductWidget(),
+                                            child: const SizedBox(),
+                                           // child: const UnselectedProductWidget(),
                                           ),
                                           if(Get.find<SplashController>().configModel.content?.directProviderBooking==1)
                                           const SizedBox(width: Dimensions.paddingSizeSmall),
@@ -365,7 +366,8 @@ class _CartScreenState extends State<CartScreen> {
                           subcategoryId: cartController.cartList.first.subCategoryId,
                         ),);
                       },
-                      child: const UnselectedProductWidget(),
+                      child: const SizedBox(),
+                      //child: const UnselectedProductWidget(),
                     ),
                     if(Get.find<SplashController>().configModel.content?.directProviderBooking==1)
                     const SizedBox(width: Dimensions.paddingSizeEight,),

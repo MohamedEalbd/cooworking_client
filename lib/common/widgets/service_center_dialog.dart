@@ -232,7 +232,9 @@ class _ProductBottomSheetState extends State<ServiceCenterDialog> {
                               ),);
                             },
                             child:  SelectedProductWidget(providerData: widget.providerData ?? cartController.selectedProvider,),
-                          ): GestureDetector(
+                          )
+                              :
+                          GestureDetector(
                             onTap: (){
                               showModalBottomSheet(
                                 useRootNavigator: true,
@@ -242,7 +244,8 @@ class _ProductBottomSheetState extends State<ServiceCenterDialog> {
                                 subcategoryId: widget.service?.subCategoryId ??"",
                               ),);
                             },
-                            child: const UnselectedProductWidget(),
+                            child: const SizedBox(),
+                           // child: const UnselectedProductWidget(),
                           ),
 
                         if(Get.find<SplashController>().configModel.content?.directProviderBooking==1)

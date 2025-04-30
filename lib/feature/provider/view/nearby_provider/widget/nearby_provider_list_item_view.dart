@@ -53,7 +53,7 @@ class NearbyProviderListItemView extends StatelessWidget {
                                           Radius.circular(Dimensions.radiusSmall)),
                                       child: CustomImage(
                                         image: '${providerData.logoFullPath}',
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.contain,
                                         width: double.maxFinite,
                                         height: double.infinity,
                                       ),
@@ -64,15 +64,16 @@ class NearbyProviderListItemView extends StatelessWidget {
                               ),
                               const SizedBox(height: 50),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: Dimensions.paddingSizeTine),
-                                child: Text(
-                                  providerData.companyName ?? "",
-                                  style: robotoMedium.copyWith(
-                                      fontSize: Dimensions.fontSizeLarge),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.start,
+                                padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeTine),
+                                child: Center(
+                                  child: Text(
+                                    providerData.companyName ?? "",
+                                    style: robotoMedium.copyWith(
+                                        fontSize: Dimensions.fontSizeLarge),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                               RatingBar(
@@ -174,8 +175,8 @@ class NearbyProviderListItemView extends StatelessWidget {
                           ]),
                       child:  ClipOval(
                         child: CustomImage(
-                          image:  "${providerData!.logoFullPath}", // مسار اللوجو
-                          fit: BoxFit.cover,height: 80,width: 80,
+                          image:  "${providerData.logoFullPath}", // مسار اللوجو
+                          fit: BoxFit.contain,height: 80,width: 80,
                         ),
                       ),
                     ),
