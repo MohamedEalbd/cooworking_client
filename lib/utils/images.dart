@@ -159,9 +159,12 @@ class Images {
   static String get replaceCoupon => 'replace_coupon'.png;
   static String get onBoardingTop => 'onboard_top'.png;
   static String get onBoardingTopTwo => 'onboard_top_2'.png;
+  static String get on_boarding_1 => 'on_boarding_1'.png;
   static String get onBoardingBottomThree => 'onboard_bottom_three'.png;
   static String get onBoardTopOne => 'onboard_top_one'.png;
   static String get onBoardTopTwo => 'onboard_top_two'.png;
+  static String get bussinesIcon => 'bussines_icon'.svg;
+  static String get categoryOne => 'category_one'.svg;
   static String get myFavorite => 'my_favorite'.png;
   static String get favoriteProvider => 'favorite_provider'.png;
   static String get favoriteService => 'favorite_service'.png;
@@ -187,6 +190,21 @@ class Images {
   static String get noProvider => 'no-provider'.png;
   static String get noProviderBg => 'no-provider-bg'.png;
   static String get distance => 'distance'.png;
+  static String get filterIcon => 'filter_icon'.svg;
+  static String get arrow_down => 'arrow_down'.svg;
+  static String get insIcon => 'ins'.svg;
+  static String get globalIcon => 'global'.svg;
+  static String get location_icon => 'location_icon'.svg;
+  static String get privateOffice => 'private_office'.svg;
+  static String get commonOffice => 'common_office'.svg;
+  static String get membersIcon => 'members'.svg;
+  static String get chairsIcon => 'chairs'.svg;
+  static String get vrOfficeIcon => 'vr_office'.svg;
+  static String get areaIcon => 'area_icon'.svg;
+  static String get officeWithHour => 'office_with_hour'.svg;
+  static String get priceCheckIcon => 'price_check'.svg;
+  static String get radio_button => 'radio_button'.svg;
+  static String get priceCheckImage => 'price_check'.png;
 
   static String get copyCouponIcon => 'copy_coupon_icon'.png;
   static String get appliedCouponPercentIcon => 'applied_coupon_percent_icon'.png;

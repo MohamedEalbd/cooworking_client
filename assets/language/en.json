@@ -951,5 +951,14 @@
   "Unknown Location Found": "Unknown Location Found",
   "welcomeToCoworking" : "Welcome to Coworking",
   "pleaseenteryourmobilenumbertologin" : "Please enter your mobile number to log in.",
-  "registerAsAServiceProvider" : "Register as a service provider"
+  "registerAsAServiceProvider" : "Register as a service provider",
+  "sharedSpaces" : "Shared spaces",
+  "businessServices" : "Business services",
+  "bestRated" : "Best rated",
+  "coworkingSpacesNearYou" : "Coworking spaces near you",
+  "reserveAWorkspaceNearYourLocation" : "Reserve a workspace near your location",
+  "bookNow" : "Book now",
+  "aboutCompany" : "About company",
+  "contactUs" : "Contact us",
+  "choose" : "Select"
 }

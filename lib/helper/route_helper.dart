@@ -6,6 +6,8 @@ import 'package:khidmh/feature/provider/view/nearby_provider/near_by_provider_sc
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
 
+import '../feature/service/view/new_all_service_view.dart';
+
 class RouteHelper {
 
   static const String initial = '/';
@@ -48,6 +50,7 @@ class RouteHelper {
   static const String trackBooking = '/track-booking';
   static const String rateReviewScreen = '/rate-review-screen';
   static const String allServiceScreen = '/service';
+  static const String allNewServiceScreen = '/newservice';
   static const String featheredServiceScreen = '/feathered-service-screen';
   static const String subCategoryScreen = '/subcategory-screen';
   static const String notLoggedScreen = '/not-logged-screen';
@@ -182,6 +185,8 @@ class RouteHelper {
       '$repeatBookingDetailsScreen?booking_id=$bookingId&sub_booking_id=$subBookingId&fromPage=$fromPage';
   static String getRateReviewScreen(String id) => '$rateReviewScreen?id=$id';
   static String allServiceScreenRoute(String fromPage, {String campaignID = ''}) => '$allServiceScreen?fromPage=$fromPage&campaignID=$campaignID';
+  //static String allServiceScreenRoute(String fromPage, {String campaignID = ''}) => '$allServiceScreen?fromPage=$fromPage&campaignID=$campaignID';
+  static String allNewServiceScreenRoute(String fromPage, {String campaignID = ''}) => '$allNewServiceScreen?fromPage=$fromPage&campaignID=$campaignID';
   static String getFeatheredCategoryService(String fromPage, String categoryId) => '$featheredServiceScreen?fromPage=$fromPage&categoryId=$categoryId';
   static String subCategoryScreenRoute(String categoryName,String categoryID,int subCategoryIndex) =>
       '$subCategoryScreen?categoryName=$categoryName&categoryId=$categoryID&subCategoryIndex=$subCategoryIndex';
@@ -506,7 +511,8 @@ class RouteHelper {
     )),
 
     GetPage(binding: BookingBinding(),name: trackBooking, page: ()=> const BookingTrackScreen(),),
-    GetPage(binding: ServiceBinding(),name: allServiceScreen, page:  ()=> getRoute(AllServiceView(fromPage: Get.parameters['fromPage'],campaignID: Get.parameters['campaignID'],)),),
+    GetPage(binding: ServiceBinding(),name: allServiceScreen, page:  ()=> getRoute(NewAllServiceView(fromPage: Get.parameters['fromPage'],campaignID: Get.parameters['campaignID'],)),),
+    GetPage(binding: ServiceBinding(),name: allNewServiceScreen, page:  ()=> getRoute(AllServiceView(fromPage: Get.parameters['fromPage'],campaignID: Get.parameters['campaignID'],)),),
     GetPage(binding: ServiceBinding(),name: subCategoryScreen, page: ()=> SubCategoryScreen(
       categoryTitle: Get.parameters['categoryName'],
       categoryID: Get.parameters['categoryId'],

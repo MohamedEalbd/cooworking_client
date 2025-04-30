@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
 
+import '../../feature/home/widget/person_card.dart';
+import '../../feature/service/widget/new_service_widget.dart';
+
 class ServiceViewVertical extends GetView<ServiceController> {
   final List<Service>? service;
   final EdgeInsetsGeometry? padding;
@@ -34,15 +37,17 @@ class ServiceViewVertical extends GetView<ServiceController> {
             key: UniqueKey(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: Dimensions.paddingSizeLarge,
-                mainAxisSpacing:  Dimensions.paddingSizeLarge,
-                mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 260 ,
+                mainAxisSpacing:  Dimensions.paddingSizeDefault,
+                mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 245 ,
                 crossAxisCount: ResponsiveHelper.isDesktop(context) ? 5 : ResponsiveHelper.isTab(context) ? 3 : 2 ),
             physics: isScrollable! ? const BouncingScrollPhysics() : const NeverScrollableScrollPhysics(),
             shrinkWrap: isScrollable! ? false : true,
             itemCount: service!.length,
             padding: padding,
             itemBuilder: (context, index) {
-              return ServiceWidgetVertical(service: service![index], fromType: '',fromPage: fromPage??"", signInShakeKey: signInShakeKey,);
+              //return const PersonCard();
+              return NewServiceWidget(service: service![index],);
+             // return ServiceWidgetVertical(service: service![index], fromType: '',fromPage: fromPage??"", signInShakeKey: signInShakeKey,);
             },
           ) : length == 0 ? Center(
             child: SizedBox(height: ResponsiveHelper.isDesktop(context) ?  MediaQuery.of(context).size.height * 0.7 : MediaQuery.of(context).size.height * 0.55,
@@ -58,7 +63,7 @@ class ServiceViewVertical extends GetView<ServiceController> {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: Dimensions.paddingSizeDefault,
               mainAxisSpacing:  Dimensions.paddingSizeDefault,
-              mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 240 ,
+              mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 250 ,
               crossAxisCount: ResponsiveHelper.isDesktop(context) ? 5 : ResponsiveHelper.isTab(context) ? 3 : 2,
             ),
             physics: isScrollable! ? const BouncingScrollPhysics() : const NeverScrollableScrollPhysics(),

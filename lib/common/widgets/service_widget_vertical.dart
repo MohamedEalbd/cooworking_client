@@ -178,8 +178,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).cardColor,
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.radiusSmall),
+                      borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
                       boxShadow: Get.find<ThemeController>().darkTheme
                           ? null
                           : cardShadow,
@@ -202,7 +201,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(Dimensions.radiusSmall)),
                                   child: CustomImage(
-                                    image: '${service.thumbnailFullPath}',
+                                    image: '${service.coverImageFullPath}',
                                     fit: BoxFit.cover,
                                     width: double.maxFinite,
                                     height: double.infinity,
@@ -323,7 +322,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.white.withOpacity(0.5),
-                          spreadRadius: 10,
+                          spreadRadius: 3,
                           offset: const Offset(0, 0),
                           blurRadius: 1,
                         )

@@ -28,7 +28,7 @@ class HorizontalScrollServiceView extends GetView<ServiceController> {
             ): fromPage == 'popular_services' ?
             Container(height: isLtr ? 320 : 335,
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                // color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.07),
                //  image: DecorationImage(
                //    image: AssetImage(

@@ -6,6 +6,8 @@ import 'package:khidmh/helper/data_sync_helper.dart';
 import 'package:khidmh/utils/core_export.dart';
 import 'package:get/get.dart';
 
+import '../model/category_item_dymmy_model.dart';
+
 
 class ProviderBookingController extends GetxController implements GetxService {
   final ProviderBookingRepo providerBookingRepo;
@@ -22,6 +24,7 @@ class ProviderBookingController extends GetxController implements GetxService {
   ProviderDetailsContent? get providerDetailsContent => _providerDetailsContent;
 
   List<CategoryModelItem> categoryItemList =[];
+  List<CategoryItemDymmyModel> categoryItemDymmyModel =[];
 
   List<ProviderData>? _providerList;
   List<ProviderData>? get  providerList=> _providerList;
@@ -133,7 +136,16 @@ class ProviderBookingController extends GetxController implements GetxService {
 
 
   Future<void> getProviderDetailsData(String providerId, bool reload, {int offSet = 1}) async {
-
+    categoryItemDymmyModel = [
+      CategoryItemDymmyModel(txt: 'مكتب خاص', img: Images.privateOffice),
+      CategoryItemDymmyModel(txt: 'مكتب مشترك', img: Images.commonOffice),
+      CategoryItemDymmyModel(txt: 'عضويات', img: Images.membersIcon),
+      CategoryItemDymmyModel(txt: 'مكتب مخصص', img: Images.chairsIcon),
+      CategoryItemDymmyModel(txt: 'قاعة اجتماعات', img: Images.vrOfficeIcon),
+      CategoryItemDymmyModel(txt: 'مكتب افتراضي', img: Images.vrOfficeIcon),
+      CategoryItemDymmyModel(txt: 'منطقة فعاليات', img: Images.areaIcon),
+      CategoryItemDymmyModel(txt: 'مكتب خاص بالساعه', img: Images.officeWithHour),
+    ];
     if(_providerDetailsContent == null || reload){
       if(reload){
         categoryItemList =[];

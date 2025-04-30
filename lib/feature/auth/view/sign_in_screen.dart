@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
 
@@ -84,7 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Column( children: [
 
                             Hero(tag: Images.logo,
-                              child: Image.asset(Images.logoWithName, width: 350,),
+                              child:  SvgPicture.asset(Images.titleLogo, width: 280),
                             ),
                             SizedBox(height: manualLogin == 1 || otpLogin == 1 ? Dimensions.paddingSizeExtraMoreLarge : Dimensions.paddingSizeDefault),
 

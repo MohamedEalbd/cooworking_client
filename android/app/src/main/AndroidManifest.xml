@@ -24,7 +24,7 @@
     </queries>
 
     <application
-        android:label="Workspace"
+        android:label="CO-WORKING"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         android:extractNativeLibs="true"

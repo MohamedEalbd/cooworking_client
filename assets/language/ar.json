@@ -951,5 +951,14 @@
   "Unknown Location Found": "العثور على موقع غير معروف",
   "welcomeToCoworking" : "أهلا بك في كووركينغ",
   "pleaseenteryourmobilenumbertologin" : "من فضلك أدخل رقم جوالك لتسجيل الدخول",
-  "registerAsAServiceProvider" : "سجل كمزود خدمة"
+  "registerAsAServiceProvider" : "سجل كمزود خدمة",
+  "sharedSpaces" : "مساحات مشتركة",
+  "businessServices" : "خدمات الأعمال",
+  "bestRated" : "الأفضل تقييما",
+  "coworkingSpacesNearYou" : "مساحات عمل بالقرب منك",
+  "reserveAWorkspaceNearYourLocation" : "احجز مساحة عمل بالقرب من موقعك",
+  "bookNow" : "احجز الآن",
+  "aboutCompany" : "عن الشركة",
+  "contactUs" : "تواصل معنا",
+  "choose" : "اختيار"
 }

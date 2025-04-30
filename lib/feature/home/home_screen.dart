@@ -1,7 +1,12 @@
 import 'package:flutter_svg/svg.dart';
+import 'package:khidmh/feature/home/widget/build_category_widget.dart';
+import 'package:khidmh/feature/home/widget/location_banner_view_widget.dart';
 import 'package:khidmh/feature/home/widget/nearby_provider_listview.dart';
 import 'package:get/get.dart';
+import 'package:khidmh/feature/home/widget/person_view_vertical.dart';
 import 'package:khidmh/utils/core_export.dart';
+
+import 'all_company_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static Future<void> loadData(bool reload, {int availableServiceCount = 1}) async {
@@ -196,8 +201,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             child: Row( children: [
 
                                               const SizedBox(width: Dimensions.paddingSizeExtraSmall,),
-                                              Text('search_services'.tr, style: robotoRegular.copyWith(color: Theme.of(context).hintColor)),
-                                              const Spacer(),
+                                              Expanded(child: Text('search_services'.tr,maxLines: 1, style: robotoRegular.copyWith(color: Theme.of(context).hintColor))),
+                                              //const Spacer(),
                                               Container(height: 45, width: 45,
                                                 // decoration: BoxDecoration(
                                                 //     color: Theme.of(context).colorScheme.primary,shape: BoxShape.circle
@@ -214,16 +219,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       const SizedBox(width: 8,),
                                       //const Spacer(),
-                                      Container(
-                                          alignment: Alignment.center,
-                                          width: 127,
-                                           height: 45,
-                                          //padding:const EdgeInsets.symmetric(horizontal: 12,vertical: 16),
-                                          decoration: BoxDecoration(
-                                            color:const Color(0xFFFFDD00),
-                                            borderRadius: BorderRadius.circular(8),
-                                          ),
-                                          child: Text("registerAsAServiceProvider".tr,style: const TextStyle(color: Color(0xff181F1F),fontWeight: FontWeight.w500,fontSize: 12),)),
+                                      InkWell(
+                                        onTap: (){
+                                          Get.toNamed(RouteHelper.getProviderWebView());
+                                          //GetPlatform.isWeb ? '${AppConstants.baseUrl}/provider/auth/sign-up' : RouteHelper.getProviderWebView();
+                                        },
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            width: 127,
+                                             height: 45,
+                                            //padding:const EdgeInsets.symmetric(horizontal: 12,vertical: 16),
+                                            decoration: BoxDecoration(
+                                              color:const Color(0xFFFFDD00),
+                                              borderRadius: BorderRadius.circular(8),
+                                            ),
+                                            child: Text("registerAsAServiceProvider".tr,style: const TextStyle(color: Color(0xff181F1F),fontWeight: FontWeight.w500,fontSize: 12),)),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -243,80 +254,97 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Center(child: SizedBox(width: Dimensions.webMaxWidth, child: Column(children: [
 
                             const BannerView(),
-                            availableServiceCount > 0 ? Column(children: [
-                              const Padding(padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
-                                child: CategoryView(),
-                              ),
 
-                              const Padding(padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
-                                child: HighlightProviderWidget(),
-                              ),
-
-                              const SizedBox(height: Dimensions.paddingSizeLarge),
-                              HorizontalScrollServiceView(fromPage: 'popular_services',serviceList: serviceController.popularServiceList),
-
-                              const RandomCampaignView(),
-
-                              const SizedBox(height: Dimensions.paddingSizeLarge),
-                              RecommendedServiceView(height: isLtr ? 225 : 240,),
-
-                              SizedBox(height: (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ? Dimensions.paddingSizeLarge : 0,),
-
-                              (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
-                              NearbyProviderListview(height:  isLtr ? 190 : 205) : const SizedBox(),
-
-
-                              (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
-                              Padding(padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault, vertical: Dimensions.paddingSizeLarge),
-                                child: SizedBox(
-                                  height: 160,
-                                  child: ExploreProviderCard(showShimmer: providerController.providerList == null,),
-                                ),
-                              ) : const SizedBox(),
-
-                              if(Get.find<SplashController>().configModel.content?.directProviderBooking==1)
-                                const HomeRecommendProvider(height: 220,),
-
-                              if(Get.find<SplashController>().configModel.content?.biddingStatus == 1)
-                                (serviceController.allService != null && serviceController.allService!.isNotEmpty) ?
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault, vertical: Dimensions.paddingSizeLarge),
-                                  child: HomeCreatePostView(showShimmer: false,),
-                                ) : const SizedBox(),
-
-
-                              if(Get.find<AuthController>().isLoggedIn())
-                                HorizontalScrollServiceView(fromPage: 'recently_view_services',serviceList: serviceController.recentlyViewServiceList),
-                              const CampaignView(),
-                              HorizontalScrollServiceView(fromPage: 'trending_services',serviceList: serviceController.trendingServiceList),
-
-                              const FeatheredCategoryView(),
-
-                              (serviceController.allService != null && serviceController.allService!.isNotEmpty) ? (ResponsiveHelper.isMobile(context) || ResponsiveHelper.isTab(context))?  Padding(
-                                padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeDefault, 15, Dimensions.paddingSizeDefault,  Dimensions.paddingSizeSmall,),
-                                child: TitleWidget(
-                                  textDecoration: TextDecoration.underline,
-                                  title: 'all_service'.tr,
-                                  onTap: () => Get.toNamed(RouteHelper.getSearchResultRoute()),
-                                ),
-                              ) : const SizedBox.shrink() : const SizedBox.shrink(),
-
-                              PaginatedListView(
-                                scrollController: scrollController,
-                                totalSize: serviceController.serviceContent?.total ,
-                                offset:  serviceController.serviceContent?.currentPage ,
-                                onPaginate: (int offset) async => await serviceController.getAllServiceList(offset, false),
-                                showBottomSheet: true,
-                                itemView: ServiceViewVertical(
-                                  service: serviceController.serviceContent != null ? serviceController.allService : null,
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeExtraSmall : Dimensions.paddingSizeDefault,
-                                    vertical: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeExtraSmall : 0,
+                            availableServiceCount > 0
+                                ?
+                            Column(
+                              children: [
+                                const SizedBox(height: Dimensions.paddingSizeLarge),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: BuildCategoryWidget(img:Images.categoryOne,txt:"sharedSpaces".tr,onTap:(){
+                                            Navigator.push(context, MaterialPageRoute(builder: (_) =>  AllCompanyScreen(txt: "sharedSpaces".tr,)));
+                                          })
+                                      ),
+                                      const SizedBox(width: 16,),
+                                      Expanded(
+                                          child: BuildCategoryWidget(img:Images.bussinesIcon,txt:"businessServices".tr,onTap:(){})
+                                      ),
+                                    ],
                                   ),
-                                  type: 'others',
-                                  noDataType: NoDataType.home,
                                 ),
-                              ),
+                              // const Padding(padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
+                              //   child: CategoryView(),
+                              // ),
+
+                              // const Padding(padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
+                              //   child: HighlightProviderWidget(),
+                              // ),
+
+                             // const SizedBox(height: Dimensions.paddingSizeLarge),
+                             // HorizontalScrollServiceView(fromPage: 'popular_services',serviceList: serviceController.popularServiceList),
+
+                             // const RandomCampaignView(),
+
+                              // const SizedBox(height: Dimensions.paddingSizeLarge),
+                             //  RecommendedServiceView(height: isLtr ? 225 : 240,),
+
+                             // SizedBox(height: (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ? Dimensions.paddingSizeLarge : 0,),
+
+                              (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
+                              NearbyProviderListview(height:  isLtr ? 190 : 205,fromHome: true,) : const SizedBox(),
+
+                                const LocationBannerViewWidget(),
+                              // (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
+                              // Padding(padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault, vertical: Dimensions.paddingSizeLarge),
+                              //   child: SizedBox(
+                              //     height: 160,
+                              //     child: ExploreProviderCard(showShimmer: providerController.providerList == null,),
+                              //   ),
+                              // ) : const SizedBox(),
+
+                              // if(Get.find<SplashController>().configModel.content?.directProviderBooking==1)
+                              //   const HomeRecommendProvider(height: 220,),
+                              //
+                              // if(Get.find<SplashController>().configModel.content?.biddingStatus == 1)
+                              //   (serviceController.allService != null && serviceController.allService!.isNotEmpty) ?
+                              //   const Padding(
+                              //     padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault, vertical: Dimensions.paddingSizeLarge),
+                              //     child: HomeCreatePostView(showShimmer: false,),
+                              //   ) : const SizedBox(),
+                              //
+                              //
+                              // if(Get.find<AuthController>().isLoggedIn())
+                              //   HorizontalScrollServiceView(fromPage: 'recently_view_services',serviceList: serviceController.recentlyViewServiceList),
+                              // const CampaignView(),
+                              // HorizontalScrollServiceView(fromPage: 'trending_services',serviceList: serviceController.trendingServiceList),
+                              //
+                              // const FeatheredCategoryView(),
+
+                              // (serviceController.allService != null && serviceController.allService!.isNotEmpty) ? (ResponsiveHelper.isMobile(context) || ResponsiveHelper.isTab(context))?  Padding(
+                              //   padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeDefault, 15, Dimensions.paddingSizeDefault,  Dimensions.paddingSizeSmall,),
+                              //   child: TitleWidget(
+                              //     textDecoration: TextDecoration.underline,
+                              //     title: 'all_service'.tr,
+                              //     onTap: () => Get.toNamed(RouteHelper.getSearchResultRoute()),
+                              //   ),
+                              // ) : const SizedBox.shrink() : const SizedBox.shrink(),
+
+                                  (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
+                                  PersonViewVertical(height:  isLtr ? 190 : 205) : const SizedBox(),
+                                // itemView: ServiceViewVertical(
+                                //   service: serviceController.serviceContent != null ? serviceController.allService : null,
+                                //   padding: EdgeInsets.symmetric(
+                                //     horizontal: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeExtraSmall : Dimensions.paddingSizeDefault,
+                                //     vertical: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeExtraSmall : 0,
+                                //   ),
+                                //   type: 'others',
+                                //   noDataType: NoDataType.home,
+                                // ),
+                              //),
                             ],) : SizedBox( height: MediaQuery.of(context).size.height *.6, child: const ServiceNotAvailableScreen())
 
                           ]))),
@@ -331,5 +359,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+
 }
 
