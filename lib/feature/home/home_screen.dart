@@ -272,7 +272,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       const SizedBox(width: 16,),
                                       Expanded(
-                                          child: BuildCategoryWidget(img:Images.bussinesIcon,txt:"businessServices".tr,onTap:(){})
+                                          child: BuildCategoryWidget(img:Images.bussinesIcon,txt:"businessServices".tr,onTap:(){
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Dialog(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(20),
+                                                  ),
+                                                  child: Stack(
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(20.0),
+                                                        child: SizedBox(
+                                                          height: 150,
+                                                          child: Center(
+                                                            child: Text(
+                                                              'soon'.tr,
+                                                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Positioned(
+                                                        top: 8,
+                                                        right: 8,
+                                                        child: GestureDetector(
+                                                          onTap: () => Navigator.of(context).pop(),
+                                                          child: const Icon(Icons.close, size: 24),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+
+                                          })
                                       ),
                                     ],
                                   ),

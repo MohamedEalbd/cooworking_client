@@ -960,5 +960,8 @@
   "bookNow" : "احجز الآن",
   "aboutCompany" : "عن الشركة",
   "contactUs" : "تواصل معنا",
-  "choose" : "اختيار"
+  "choose" : "اختيار",
+  "soon" : "قريبًا",
+  "available" : "متاح",
+  "unavailable" : "غير متاح"
 }

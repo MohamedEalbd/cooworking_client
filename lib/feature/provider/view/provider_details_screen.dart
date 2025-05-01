@@ -310,7 +310,7 @@ class ProviderDetailsScreenState extends State<ProviderDetailsScreen> with Singl
         children: [
           const Text("نبذة عن الشركة:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           const SizedBox(height: 8),
-          const Text("لوريم إيبسوم هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات الطباعة والنشر. كان لوريم إيبسوم ولا يزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف",
+          const Text("شركة مساحات عمل تقدم بيئة عمل مرنة ومجهزة بالكامل للمستقلين والشركات الناشئة. توفر مكاتب خاصة، قاعات اجتماعات، مساحات مشتركة، وخدمات إدارية، مما يساعد على تعزيز الإنتاجية والتواصل المهني في أجواء محفزة وعصرية.",
               style: TextStyle(fontSize: 12, height: 1.5,color: Color(0xff6C757D))),
           const SizedBox(height: 16),
           const Divider(),

@@ -38,7 +38,7 @@ class BuildCategoryWidget extends StatelessWidget {
           ),
           child: CustomImage(
             image: img ?? "",
-            fit: BoxFit.cover,height: 40,
+            fit: BoxFit.contain,height: 40,
             width: 40,
           ),
         ),

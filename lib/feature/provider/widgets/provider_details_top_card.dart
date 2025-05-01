@@ -39,7 +39,7 @@ class ProviderDetailsTopCard extends StatelessWidget {
                   child: Row(crossAxisAlignment: CrossAxisAlignment.center,children: [
                     Stack(alignment: Alignment.bottomCenter,children: [
                       ClipRRect(borderRadius: BorderRadius.circular(Dimensions.radiusExtraMoreLarge),
-                        child: CustomImage(height: 90, width: 90, fit: BoxFit.cover,
+                        child: CustomImage(height: 90, width: 90, fit: BoxFit.contain,
                           image: providerDetails.logoFullPath ?? "",
                           placeholder: Images.userPlaceHolder,
                         ),

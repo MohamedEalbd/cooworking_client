@@ -960,5 +960,8 @@
   "bookNow" : "Book now",
   "aboutCompany" : "About company",
   "contactUs" : "Contact us",
-  "choose" : "Select"
+  "choose" : "Select",
+  "soon" : "Soon",
+  "available" : "Available",
+  "unavailable" : "unavailable"
 }
