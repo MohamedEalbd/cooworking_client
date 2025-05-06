@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
 
@@ -11,6 +12,7 @@ class ServiceDetailsScreen extends StatefulWidget {
 }
 
 class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
+  final PageController pageController = PageController();
   final ScrollController scrollController = ScrollController();
   final scaffoldState = GlobalKey<ScaffoldState>();
   late   SharedPreferences sharedPreferences;
@@ -30,6 +32,13 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       Get.find<ServiceController>().getRecentlyViewedServiceList(1,true,);
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,6 +62,131 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   }
                 }
               }
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  PageView.builder(
+                      controller: pageController,
+                      itemCount: 3,
+                      itemBuilder: (context,index){
+                        return Container(
+                          alignment: Alignment.topRight,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            image: DecorationImage(
+                              alignment: Alignment.topCenter,
+                              image: NetworkImage(service.coverImageFullPath ?? ""),),
+                          ),
+                          child: Container(
+                            margin:const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+                            height: 40,width: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(0.80),
+                            ),
+                            child:IconButton(onPressed: (){
+                              Get.back();
+                            }, icon:const Icon(Icons.arrow_back,color: Color(0xff6B7280),size: 16)),
+                            // child: Container(
+                            //  // height: 200,
+                            //   width: MediaQuery.of(context).size.width,
+                            //   padding:const EdgeInsets.only(top: 16,right: 16,left: 16),
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     borderRadius: BorderRadius.only(topRight: Radius.circular(24),topLeft: Radius.circular(24)),
+                            //   ),
+                            //   child:  Column(
+                            //     children: [
+                            //      SizedBox(height: 100,),
+                            //     ],
+                            //   ),
+                            // ),
+
+                          ),
+                        );
+                      }
+                  ),
+                  Positioned(
+                    top: 170,
+                    child: SmoothPageIndicator(
+                        controller: pageController,  // PageController
+                        count:  3,
+                        effect: const WormEffect(
+                          dotHeight: 12,dotWidth: 12,
+                          activeDotColor: Color(0xff018995),
+                          dotColor: Colors.white,
+                        ),  // your preferred effect
+                        onDotClicked: (index){
+                        }
+                    ),
+                  ),
+                  Positioned(
+                    top: 190,
+                    child: Container(
+                      //height: 200,
+                      padding:const EdgeInsets.only(top:16,left: 16,right: 16),
+                      width: MediaQuery.of(context).size.width,
+                      decoration:const BoxDecoration(
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(24),topLeft: Radius.circular(24)),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Text("مكتب خاص صغير",style: TextStyle(fontSize: 18,fontWeight:FontWeight.w500,color: Color(0xff283435)),),
+                              const Spacer(),
+                              Row(
+                                spacing: 5,
+                                children: [
+                                  const Text("8م",style: TextStyle(fontSize: 14,fontWeight:FontWeight.w400,color: Color(0xff606D6E))),
+                                  SvgPicture.asset(Images.radio_button),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 14,),
+                          Row(children: [
+                            SvgPicture.asset(Images.location_icon),
+                            const Text("مكتب خاص صغير",style: TextStyle(fontSize: 14,fontWeight:FontWeight.w400,color: Color(0xff606D6E)),),
+                          ],),
+                          const SizedBox(height: 8,),
+                           Align(
+                              alignment: Alignment.centerRight,
+                              child: Text("services".tr,style:const TextStyle(fontSize: 18,fontWeight:FontWeight.w500,color: Color(0xff283435)),)),
+                          const SizedBox(height: 12,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ...List.generate(3, (index){
+                                return const CustomCard(title: "OK",image: '',);
+                              }),
+                            ],
+                          ),
+                          const SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ...List.generate(3, (index){
+                                return const CustomCard(title: "OK",image: '',);
+                              }),
+                            ],
+                          ),
+                          const SizedBox(height: 8,),
+                           Align(
+                              alignment: Alignment.centerRight,
+                              child: Text("address".tr,style:const TextStyle(fontSize: 18,fontWeight:FontWeight.w500,color: Color(0xff283435)),)),
+                          const SizedBox(height: 12,),
+                          Container(
+                            height: 100,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
               return  FooterBaseView(
                 isScrollView:ResponsiveHelper.isMobile(context) ? false: true,
                 child: SizedBox(
@@ -216,3 +350,33 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
   }
 }
 
+class CustomCard extends StatelessWidget {
+  const CustomCard({super.key, required this.title,  this.image='',this.onTap});
+  final void Function()? onTap;
+  final String title;
+  final String image ;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            color: const Color(0xffF5FAFB)
+        ),
+        child: Row(
+          children: [
+            if(image.isNotEmpty)
+              SvgPicture.asset(image),
+            Text(title,style:const TextStyle(
+              fontSize: 14,fontWeight: FontWeight.w400,color: Color(0xff38494A),
+            ),),
+          ],
+        ),
+      ),
+    );
+  }
+}

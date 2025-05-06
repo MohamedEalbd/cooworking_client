@@ -162,51 +162,76 @@ class _FiltersRowState extends State<FiltersRow> {
           ),
         ),
         // الزر الأول (حسب التوفر)
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child:  Row(
-            children: [
-              const SizedBox(width: 8),
-              SvgPicture.asset(Images.filterIcon,width: 17,height: 15,),
-              const SizedBox(width: 8),
-              const Text(
-                'حسب التوفر',
-                style: TextStyle(
-                  color: Color(0xff0D4D63),
-                  fontWeight: FontWeight.w400,
+        GestureDetector(
+          onTap: (){
+            showModalBottomSheet(context: context, builder: (context){
+              return Container(
+                width : double.infinity,
+                height: 852,
+                padding:const EdgeInsets.only(top: 6,left: 10,bottom: 16,right: 10),
+                decoration:const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                 ),
-              ),
-              const SizedBox(width: 8),
-              const CircleAvatar(
-                radius: 12,
-                backgroundColor: Color(0xff1B7B9C),
-                child: Text(
-                  '1',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                child: const Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Text("مساحة مشتركة",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: Color(0xff181F1F)),),
+                    ),
+                    SizedBox(height: 8,),
+
+                  ],
                 ),
-              ),
+              );
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child:  Row(
+              children: [
+                const SizedBox(width: 8),
+                SvgPicture.asset(Images.filterIcon,width: 17,height: 15,),
+                const SizedBox(width: 8),
+                const Text(
+                  'حسب التوفر',
+                  style: TextStyle(
+                    color: Color(0xff0D4D63),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const CircleAvatar(
+                  radius: 12,
+                  backgroundColor: Color(0xff1B7B9C),
+                  child: Text(
+                    '1',
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ),
 
 
 
 
-              // Icon(
-              //   Icons.tune, // يمكن تغييره لأيقونة مشابهة للأصل
-              //   size: 18,
-              //   color: Colors.teal,
-              // ),
-            ],
+                // Icon(
+                //   Icons.tune, // يمكن تغييره لأيقونة مشابهة للأصل
+                //   size: 18,
+                //   color: Colors.teal,
+                // ),
+              ],
+            ),
           ),
         ),
 
