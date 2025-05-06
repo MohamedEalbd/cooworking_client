@@ -181,6 +181,7 @@ class _FiltersRowState extends State<FiltersRow> {
                     ),
                     SizedBox(height: 8,),
                     Container(),
+                    Container(),
 
                   ],
                 ),
