@@ -1,0 +1,2 @@
+E:/new_apps/New folder/cooworking_client/android/app/.cxx/Debug/42ja6e4t/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/new_apps/New folder/cooworking_client/android/app/.cxx/Debug/42ja6e4t/arm64-v8a/CMakeFiles/rebuild_cache.dir
