@@ -173,13 +173,14 @@ class _FiltersRowState extends State<FiltersRow> {
                   color: Colors.white,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                 ),
-                child: const Column(
+                child:  Column(
                   children: [
                     Align(
                       alignment: Alignment.topRight,
                       child: Text("مساحة مشتركة",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: Color(0xff181F1F)),),
                     ),
                     SizedBox(height: 8,),
+                    Container(),
 
                   ],
                 ),
