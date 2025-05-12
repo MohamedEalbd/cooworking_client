@@ -4,7 +4,7 @@ class AppConstants {
 
   static const String appName = 'CO-WORKING';
   static const String appVersion = '1.0';
-  //static const String baseUrl = 'https://monasabetak.tatpik.com';
+ // static const String baseUrl = 'https://monasabetak.tatpik.com';
   static const String baseUrl = 'https://co-workingspace.co';
   static const bool avoidMaintenanceMode = false;
   static const LocalCachesTypeEnum cachesType = LocalCachesTypeEnum.all;
@@ -83,7 +83,7 @@ class AppConstants {
   static const String getProviderList = '/api/v1/customer/provider/list';
   static const String getProviderDetails = '/api/v1/customer/provider-details';
   static const String getProviderBasedOnSubcategory = '/api/v1/customer/provider/list-by-sub-category';
-  static const String getFeaturedCategoryService = '/api/v1/customer/category/featured-categories?limit=100&offset=1';
+  static const String getFeaturedCategoryService = '/api/v1/customer/featured-categories?limit=100&offset=1';
 
   static const String createCustomizedPost = '/api/v1/customer/post';
   static const String getMyPostList = '/api/v1/customer/post';

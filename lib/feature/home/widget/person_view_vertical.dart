@@ -59,7 +59,7 @@ class PersonViewVertical extends StatelessWidget {
                     crossAxisCount: ResponsiveHelper.isDesktop(context) ? 5 : ResponsiveHelper.isTab(context) ? 3 : 2 ),
                 shrinkWrap: true, // يخليه ياخد ارتفاع العناصر فقط
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: providerBookingController.providerIndependentList?.length,
+                itemCount: providerBookingController.providerIndependentList!.length > 2 ? 2 : providerBookingController.providerIndependentList?.length,
                 itemBuilder: (context, index){
                   return Padding(padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeLarge),
                     child: SizedBox(

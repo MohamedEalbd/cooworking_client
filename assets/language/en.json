@@ -963,5 +963,21 @@
   "choose" : "Select",
   "soon" : "Soon",
   "available" : "Available",
-  "unavailable" : "unavailable"
+  "unavailable" : "unavailable",
+  "numberOfIndividuals" : "Number of individuals",
+  "pleaseFillInTheEmptyFields" : "Please fill in the empty fields.",
+  "bookingDate" : "Booking date",
+  "numberOfMonths" : "Number of months",
+  "startAndEndTime" : "Start and end time",
+  "chooseTheAppropriateBranch" : "Choose the appropriate branch",
+  "startTime" : "Start time",
+  "bookingDetails" : "Booking details",
+  "bookingStartDate" : "Booking start date",
+  "bookingEndDate" : "Booking end date",
+  "feesAndPaymentInformation" : "Fees and payment information",
+  "thePrice" : "the price",
+  "paymentMethod" : "payment method",
+  "cancellationPolicy" : "Cancellation Policy",
+  "freeCancellation" : "Free cancellation 3 days in advance. Cancel before check-in to get a refund.",
+  "confirmAndPay" : "Confirm and pay"
 }

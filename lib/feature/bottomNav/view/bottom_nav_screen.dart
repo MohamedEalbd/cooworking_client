@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:khidmh/utils/core_export.dart';
 import 'package:get/get.dart';
 
@@ -60,41 +61,46 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       },
 
       child: Scaffold(
-        // floatingActionButton: ResponsiveHelper.isDesktop(context) ? null :
-        // InkWell(
-        //   onTap: () => Get.toNamed(RouteHelper.getCartRoute()),
-        //   child: Container(
-        //     height: 70,
-        //     width: 70,
-        //     alignment: Alignment.center,
-        //     decoration: BoxDecoration(
-        //       color: _pageIndex == 2
-        //           ? null
-        //           : Get.isDarkMode
-        //           ? Theme.of(context).colorScheme.primary
-        //           : Theme.of(context).primaryColor,
-        //       shape: BoxShape.circle,
-        //       boxShadow: [
-        //         BoxShadow(
-        //           color: Colors.black.withOpacity(0.1), // لون الظل بخفة
-        //           blurRadius: 6, // مدى التمويه
-        //           spreadRadius: 2, // مدى انتشار الظل
-        //           offset: Offset(0, 3), // اتجاه الظل للأسفل قليلًا
-        //         ),
-        //       ],
-        //     ),
-        //     child: CartWidget(
-        //       color: Get.isDarkMode ? Theme.of(context).primaryColorLight : Colors.white,
-        //       size: 30,
-        //     ),
-        //   )
-        //   ,
-        // ),
-        //
-        // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+        floatingActionButton: ResponsiveHelper.isDesktop(context) ? null :
+        InkWell(
+          onTap: () => Get.toNamed(RouteHelper.getCartRoute()),
+          child: Container(
+            height: 70,
+            width: 70,
+            margin: const EdgeInsets.only(top: 32),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: const Color(0xffFFDD00),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1), // لون الظل بخفة
+                  blurRadius: 6, // مدى التمويه
+                  spreadRadius: 2, // مدى انتشار الظل
+                  offset: const Offset(0, 3), // اتجاه الظل للأسفل قليلًا
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: 8,),
+                SvgPicture.asset(Images.AddIcon),
+                const SizedBox(height: 4,),
+                const Text("احجز الآن",style: TextStyle(color: Color(0xff181F1F),fontSize: 12,fontWeight: FontWeight.w500),)
+              ],
+            ),
+            // child: CartWidget(
+            //   color: Get.isDarkMode ? Theme.of(context).primaryColorLight : Colors.white,
+            //   size: 30,
+            // ),
+          )
+          ,
+        ),
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
 
         bottomNavigationBar: ResponsiveHelper.isDesktop(context) ? const SizedBox() : Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -110,7 +116,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                 ),
 
                 _bnbItem(
-                  icon: Images.bookings, bnbItem: BnbItem.bookings, context: context,
+                  icon: Images.bookingIcon, bnbItem: BnbItem.bookings, context: context,
                   onTap: () {
                     if (!isUserLoggedIn && Get.find<SplashController>().configModel.content?.guestCheckout == 1) {
                       Get.toNamed(RouteHelper.getTrackBookingRoute());
@@ -122,24 +128,24 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                   },
                 ),
 
-                // _bnbItem(
-                //   icon: '', bnbItem: BnbItem.cart, context: context,
-                //   onTap: () {
-                //     if (!isUserLoggedIn) {
-                //       Get.toNamed(RouteHelper.getSignInRoute(fromPage: RouteHelper.home));
-                //     } else {
-                //       Get.find<BottomNavController>().changePage(BnbItem.cart);
-                //     }
-                //   },
-                // ),
-
-                // _bnbItem(
-                //   icon: Images.offerMenu, bnbItem: BnbItem.offers, context: context,
-                //   onTap: () => Get.find<BottomNavController>().changePage(BnbItem.offers),
-                // ),
+                _bnbItem(
+                  icon: '', bnbItem: BnbItem.cart, context: context,
+                  onTap: () {
+                    if (!isUserLoggedIn) {
+                      Get.toNamed(RouteHelper.getSignInRoute(fromPage: RouteHelper.home));
+                    } else {
+                      Get.find<BottomNavController>().changePage(BnbItem.cart);
+                    }
+                  },
+                ),
 
                 _bnbItem(
-                  icon: Images.menu, bnbItem: BnbItem.more,context: context,
+                  icon: Images.myProfileIcon, bnbItem: BnbItem.offers, context: context,
+                  onTap: () => Get.find<BottomNavController>().changePage(BnbItem.offers),
+                ),
+
+                _bnbItem(
+                  icon: Images.menuIcon, bnbItem: BnbItem.more,context: context,
                   onTap: () => Get.bottomSheet(const MenuScreen(),
                     backgroundColor: Colors.transparent, isScrollControlled: true,
                   ),
@@ -165,9 +171,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           onTap: bnbItem != BnbItem.cart ? onTap : null,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.min, children: [
 
-            icon.isEmpty ? const SizedBox(width: 20, height: 20) : Image.asset(icon, width: 18, height: 18,
+            icon.isEmpty ? const SizedBox(width: 20, height: 20) : icon.contains("png") ? Image.asset(icon, width: 18, height: 18,
               color: Get.find<BottomNavController>().currentPage == bnbItem ? Colors.white : Colors.white60,
-            ),
+            ) : SvgPicture.asset(icon,width: 18, height: 18,
+              color: Get.find<BottomNavController>().currentPage == bnbItem ? Colors.white : Colors.white60,),
             const SizedBox(height: Dimensions.paddingSizeExtraSmall),
 
             Text(bnbItem != BnbItem.cart ? bnbItem.name.tr : '',

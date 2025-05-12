@@ -5,6 +5,8 @@ import 'package:khidmh/helper/data_sync_helper.dart';
 import 'package:get/get.dart';
 import 'package:khidmh/utils/core_export.dart';
 
+import '../model/services_static_model.dart';
+
 
 class ServiceController extends GetxController implements GetxService {
   final ServiceRepo serviceRepo;
@@ -71,6 +73,8 @@ class ServiceController extends GetxController implements GetxService {
 
   final List<double> _lowestPriceList = [];
   List<double> get lowestPriceList => _lowestPriceList;
+
+
 
   @override
   Future<void> onInit() async {

@@ -19,6 +19,38 @@ class ServiceDetailsController extends GetxController implements GetxService{
   String? _discountType;
   String get discountType => _discountType!;
 
+
+  late DateTimeRange _selectedDateRange;
+
+  String? _from;
+  String? get from => _from;
+
+  String? _to;
+  String? get to => _to;
+
+  void showDatePicker(BuildContext context) async {
+    final DateTimeRange? result = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime.now().subtract(const Duration(days: 365)),
+      lastDate: DateTime.now(),
+      currentDate: DateTime.now(),
+      saveText: 'done'.tr,
+      confirmText: 'done'.tr,
+      cancelText: 'cancel'.tr,
+      fieldStartLabelText: 'start_date'.tr,
+      fieldEndLabelText: 'end_date'.tr,
+      errorInvalidRangeText: 'select_range'.tr,
+    );
+
+    if (result != null) {
+      _selectedDateRange = result;
+
+      _from = _selectedDateRange.start.toString().split(' ')[0];
+      _to = _selectedDateRange.end.toString().split(' ')[0];
+      update();
+      //getExpenseList(offset: '1', from: _from, to: _to, searchText: searchText);
+    }
+  }
   ///call service details data based on service id
   Future<void> getServiceDetails(String serviceID,{String fromPage=""}) async {
     _service = null;

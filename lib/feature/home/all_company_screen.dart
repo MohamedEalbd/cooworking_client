@@ -41,7 +41,7 @@ class _AllCompanyScreenState extends State<AllCompanyScreen> {
                 ),
                 const SizedBox(height: 16,),
                 Expanded(
-                    child:((isAvailableProvider || providerController.providerList == null)) ?
+                    child:
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
                       child: GetBuilder<NearbyProviderController>(
@@ -51,7 +51,7 @@ class _AllCompanyScreenState extends State<AllCompanyScreen> {
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisSpacing: Dimensions.paddingSizeDefault,
                                 //mainAxisSpacing:  Dimensions.paddingSizeDefault,
-                                mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 260 ,
+                                mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 240 ,
                                 // childAspectRatio: 3/2,
                                 crossAxisCount: ResponsiveHelper.isDesktop(context) ? 5 : ResponsiveHelper.isTab(context) ? 3 : 2 ),
                             shrinkWrap: true, // يخليه ياخد ارتفاع العناصر فقط
@@ -69,7 +69,7 @@ class _AllCompanyScreenState extends State<AllCompanyScreen> {
                           ) : Container();
                         }
                       ),
-                    ): const SizedBox(),
+                    ),
                 )
               ],
             );

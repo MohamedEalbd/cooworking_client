@@ -21,6 +21,10 @@ class Images {
   static String get home => 'home'.png;
   static String get menu => 'menu'.png;
   static String get bookings => 'bookings'.png;
+  static String get bookingIcon => 'booking_icon'.svg;
+  static String get myProfileIcon => 'my_profile'.svg;
+  static String get menuIcon => 'menu_icon'.svg;
+  static String get AddIcon => 'add_icon'.svg;
   static String get guest => 'guest'.png;
   static String get maintenance => 'maintenance'.png;
   static String get customerCare => 'customer_care'.png;
@@ -201,12 +205,20 @@ class Images {
   static String get chairsIcon => 'chairs'.svg;
   static String get vrOfficeIcon => 'vr_office'.svg;
   static String get areaIcon => 'area_icon'.svg;
+  static String get userServicesIcon => 'user_services_icon'.svg;
+  static String get iconsWifi => 'icons_wifi'.svg;
+  static String get wifiIcon => 'wifi_icon'.svg;
+  static String get groupIcon => 'group_icon'.svg;
+  static String get coffeeIcon => 'coffee_icon'.svg;
+  static String get printerIcon => 'printer'.svg;
   static String get officeWithHour => 'office_with_hour'.svg;
   static String get priceCheckIcon => 'price_check'.svg;
   static String get radio_button => 'radio_button'.svg;
+  static String get iconTime => 'icon_time'.svg;
   static String get priceCheckImage => 'price_check'.png;
 
   static String get copyCouponIcon => 'copy_coupon_icon'.png;
+  static String get mapImage => 'map_image'.png;
   static String get appliedCouponPercentIcon => 'applied_coupon_percent_icon'.png;
 
 

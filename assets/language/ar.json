@@ -963,5 +963,20 @@
   "choose" : "اختيار",
   "soon" : "قريبًا",
   "available" : "متاح",
-  "unavailable" : "غير متاح"
+  "unavailable" : "غير متاح",
+  "numberOfIndividuals" : "عدد الأفراد",
+  "bookingDate" : "تاريخ الحجز",
+  "numberOfMonths" : "عدد الأشهر",
+  "startAndEndTime" : "وقت البدء والانتهاء",
+  "chooseTheAppropriateBranch" : "اختر الفرع المناسب",
+  "startTime" : "وقت البدء",
+  "bookingDetails" : "تفاصيل الحجز",
+  "bookingStartDate" : "تاريخ بداية الحجز",
+  "bookingEndDate" : "تاريخ نهاية الحجز",
+  "feesAndPaymentInformation" : "بيانات الرسوم والدفع",
+  "thePrice" : "السعر",
+  "paymentMethod" : "طريقة الدفع",
+  "cancellationPolicy" : "سياسة الإلغاء",
+  "freeCancellation" : "إلغاء مجاني قبل 3 ايام. قم بالإلغاء قبل تسجيل الوصول لاسترداد جزىي",
+  "confirmAndPay" : "تأكيد و دفع"
 }

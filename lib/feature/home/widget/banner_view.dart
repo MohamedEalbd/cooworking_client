@@ -12,8 +12,8 @@ class BannerView extends StatelessWidget {
         return (bannerController.banners != null && bannerController.banners!.isEmpty) ?
         const SizedBox() :
         Container(width: MediaQuery.of(context).size.width,
-          height: ResponsiveHelper.isTab(context) || MediaQuery.of(context).size.width > 450 ? 350 : 200,
-          padding: const EdgeInsets.only(top: Dimensions.paddingSizeDefault),
+          height: ResponsiveHelper.isTab(context) || MediaQuery.of(context).size.width > 450 ? 350 : 150,
+          padding: const EdgeInsets.only(top: 8),
           child: bannerController.banners != null ?
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,21 +62,21 @@ class BannerView extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: Dimensions.paddingSizeSmall),
-              bannerController.banners!.length > 1 ? Align(
-                alignment: Alignment.center,
-                child: AnimatedSmoothIndicator(
-                  activeIndex: bannerController.currentIndex!,
-                  count: bannerController.banners!.length,
-                  effect: ExpandingDotsEffect(
-                    dotHeight: 7,
-                    dotWidth: 7,
-                    spacing: 5,
-                    activeDotColor: Theme.of(context).colorScheme.primary,
-                    dotColor: Theme.of(context).hintColor.withValues(alpha: 0.6),
-                  ),
-                ),
-              ): const SizedBox(),
+              // const SizedBox(height: Dimensions.paddingSizeSmall),
+              // bannerController.banners!.length > 1 ? Align(
+              //   alignment: Alignment.center,
+              //   child: AnimatedSmoothIndicator(
+              //     activeIndex: bannerController.currentIndex!,
+              //     count: bannerController.banners!.length,
+              //     effect: ExpandingDotsEffect(
+              //       dotHeight: 7,
+              //       dotWidth: 7,
+              //       spacing: 5,
+              //       activeDotColor: Theme.of(context).colorScheme.primary,
+              //       dotColor: Theme.of(context).hintColor.withValues(alpha: 0.6),
+              //     ),
+              //   ),
+              // ): const SizedBox(),
             ],
           ) :
           Padding(padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),

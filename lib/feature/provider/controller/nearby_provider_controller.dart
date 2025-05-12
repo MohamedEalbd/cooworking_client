@@ -76,6 +76,7 @@ class NearbyProviderController extends GetxController implements GetxService {
       Map<String,dynamic> body={
         'sort_by': _selectedSortBy ,
          "rating" : _selectedRating ?? "0",
+        "type" : "Provider"
       };
 
       if(selectedCategoryId.isNotEmpty){

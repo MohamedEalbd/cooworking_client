@@ -17,10 +17,10 @@ class NearbyProviderListview extends StatelessWidget {
           return providerBookingController.providerList != null && providerBookingController.providerList!.isNotEmpty
               ?
           Column(children: [
-            const SizedBox(height: Dimensions.paddingSizeDefault),
+           // const SizedBox(height: Dimensions.paddingSizeDefault),
           
             Padding(
-              padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeDefault, 15, Dimensions.paddingSizeDefault,  Dimensions.paddingSizeSmall,),
+              padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeDefault, 0, Dimensions.paddingSizeDefault,  0,),
               child: TitleWidget(
                 textDecoration: TextDecoration.underline,
                 title:'bestRated'.tr,
@@ -53,26 +53,20 @@ class NearbyProviderListview extends StatelessWidget {
             //   ),
             // ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeDefault, 15, Dimensions.paddingSizeDefault,  Dimensions.paddingSizeSmall,),
+              padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeDefault, 0, Dimensions.paddingSizeDefault,  Dimensions.paddingSizeSmall,),
               child: GridView.builder(
                 key: UniqueKey(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: Dimensions.paddingSizeLarge,
                     //mainAxisSpacing:  Dimensions.paddingSizeDefault,
-                    mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 260 ,
+                    mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 220 ,
                    // childAspectRatio: 3/2,
                     crossAxisCount: ResponsiveHelper.isDesktop(context) ? 5 : ResponsiveHelper.isTab(context) ? 3 : 2 ),
                 shrinkWrap: true, // يخليه ياخد ارتفاع العناصر فقط
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: fromHome == true ? providerBookingController.providerList!.length > 2 ? 2 : providerBookingController.providerList?.length : providerBookingController.providerList?.length,
                 itemBuilder: (context, index){
-                  return Padding(padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeLarge),
-                    child: SizedBox(
-                      width: ResponsiveHelper.isDesktop(context) ? Dimensions.webMaxWidth / 3.2 : ResponsiveHelper.isTab(context)? Get.width/ 2.5 :  Get.width/1.16,
-                     child: NearbyProviderListItemView(providerData: providerBookingController.providerList![index], index: index, signInShakeKey: signInShakeKey,),
-                     // child: NearbyProviderListItemView(providerData: providerBookingController.providerList![index], index: index, signInShakeKey: signInShakeKey,),
-                    ),
-                  );
+                  return NearbyProviderListItemView(providerData: providerBookingController.providerList![index], index: index, signInShakeKey: signInShakeKey,);
                 },
               ),
             ),

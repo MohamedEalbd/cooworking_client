@@ -26,7 +26,7 @@ class HomeScreen extends StatefulWidget {
         Get.find<NearbyProviderController>().getProviderList(1,reload),
         Get.find<NearbyProviderController>().getProviderIndependentList(1,reload),
         Get.find<CampaignController>().getCampaignList(reload),
-        Get.find<ServiceController>().getRecommendedServiceList(1, reload),
+        //Get.find<ServiceController>().getRecommendedServiceList(1, reload),
         Get.find<CheckOutController>().getOfflinePaymentMethod(false, shouldUpdate: false),
         Get.find<ServiceController>().getFeatherCategoryList(reload),
         // Get.find<ServiceAreaController>().getZoneList(reload: reload),
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
               await Get.find<BannerController>().getBannerList(true);
               await  Get.find<AdvertisementController>().getAdvertisementList(true);
               await Get.find<CategoryController>().getCategoryList(true);
-              await Get.find<ServiceController>().getRecommendedServiceList(1,true);
+              //await Get.find<ServiceController>().getRecommendedServiceList(1,true);
               await Get.find<ProviderBookingController>().getProviderList(1, true);
               await Get.find<ServiceController>().getPopularServiceList(1,true,);
               await Get.find<ServiceController>().getRecentlyViewedServiceList(1,true,);
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       slivers: [
                         SliverAppBar(
                           titleSpacing: 0,
-                          expandedHeight: 170,
+                          expandedHeight: 160,
                           flexibleSpace: PreferredSize(preferredSize:const Size(double.infinity, 350),
                             child:
                             Container(
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 spacing: 18,
                                 children: [
-                                  const SizedBox(height: 25),
+                                  const SizedBox(height: 16),
                                   Row(
                                     children: [
                                       SvgPicture.asset(Images.titleLogo,height: 40,width: 224,),
@@ -247,12 +247,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
 
-                        const SliverToBoxAdapter(child: SizedBox(height: Dimensions.paddingSizeSmall)),
+                       // const SliverToBoxAdapter(child: SizedBox(height: Dimensions.paddingSizeSmall)),
 
                        // const HomeSearchWidget(),
 
                         SliverToBoxAdapter(
-                          child: Center(child: SizedBox(width: Dimensions.webMaxWidth, child: Column(children: [
+                          child: Center(
+                              child: SizedBox(width: Dimensions.webMaxWidth, child: Column(children: [
 
                             const BannerView(),
 
@@ -260,10 +261,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ?
                             Column(
                               children: [
-                                const SizedBox(height: Dimensions.paddingSizeLarge),
+                                const SizedBox(height: 8),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
                                   child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                           child: BuildCategoryWidget(img:Images.categoryOne,txt:"sharedSpaces".tr,onTap:(){
@@ -331,10 +333,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
                              // SizedBox(height: (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ? Dimensions.paddingSizeLarge : 0,),
 
-                              (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
-                              NearbyProviderListview(height:  isLtr ? 190 : 205,fromHome: true,) : const SizedBox(),
 
-                                const LocationBannerViewWidget(),
+                              NearbyProviderListview(height:  isLtr ? 190 : 205,fromHome: true,),
+
+                                //const LocationBannerViewWidget(),
+                              ///
                               // (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
                               // Padding(padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault, vertical: Dimensions.paddingSizeLarge),
                               //   child: SizedBox(
@@ -369,9 +372,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               //     onTap: () => Get.toNamed(RouteHelper.getSearchResultRoute()),
                               //   ),
                               // ) : const SizedBox.shrink() : const SizedBox.shrink(),
-
-                                  (providerBooking == 1 && (isAvailableProvider || providerController.providerList == null)) ?
-                                  PersonViewVertical(height:  isLtr ? 190 : 205) : const SizedBox(),
+                                ///
+                                  //PersonViewVertical(height:  isLtr ? 190 : 205),
+                                ///
                                 // itemView: ServiceViewVertical(
                                 //   service: serviceController.serviceContent != null ? serviceController.allService : null,
                                 //   padding: EdgeInsets.symmetric(
@@ -382,7 +385,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 //   noDataType: NoDataType.home,
                                 // ),
                               //),
-                            ],) : SizedBox( height: MediaQuery.of(context).size.height *.6, child: const ServiceNotAvailableScreen())
+                            ],)
+                                :
+                            SizedBox( height: MediaQuery.of(context).size.height *.6, child: const ServiceNotAvailableScreen())
 
                           ]))),
                         ),

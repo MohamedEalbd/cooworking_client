@@ -334,11 +334,11 @@ class ProviderDetailsScreenState extends State<ProviderDetailsScreen> with Singl
         const SizedBox()
             :
         categoryController.categoryList != null ? GridView.builder(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: Dimensions.paddingSizeLarge,
-              childAspectRatio: 4/2,
-              mainAxisSpacing:  Dimensions.paddingSizeDefault,
+              crossAxisSpacing: 16,
+              childAspectRatio: 1,
+              mainAxisSpacing:  16,
               mainAxisExtent: ResponsiveHelper.isDesktop(context) ?  270 : 120 ,
               crossAxisCount: ResponsiveHelper.isDesktop(context) ? 5 : ResponsiveHelper.isTab(context) ? 3 : 2 ),
           itemCount: categoryController.categoryList!.length,

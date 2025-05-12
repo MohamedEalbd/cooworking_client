@@ -1,12 +1,83 @@
 import 'package:khidmh/utils/core_export.dart';
 import 'package:get/get.dart';
 
-class NearbyProviderListItemView extends StatelessWidget {
+class NearbyProviderListItemView extends StatefulWidget {
   final  bool fromHomePage;
   final ProviderData providerData;
   final GlobalKey<CustomShakingWidgetState>?  signInShakeKey;
   final int index;
   const NearbyProviderListItemView({super.key, this.fromHomePage = true, required this.providerData, required this.index, this.signInShakeKey}) ;
+
+  @override
+  State<NearbyProviderListItemView> createState() => _NearbyProviderListItemViewState();
+}
+
+class _NearbyProviderListItemViewState extends State<NearbyProviderListItemView> {
+  List<String> options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  List<bool> isChecked = [false, false, false, false];
+  int? selectedIndex;
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setStateDialog) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder( // 👈 الحواف
+                borderRadius: BorderRadius.circular(20),
+              ),
+             // title:  Center(child: Text("chooseTheAppropriateBranch".tr,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff181F1F)),)),
+              content: SizedBox(
+                width: double.maxFinite,
+                height: 320,
+                child: Column(
+                  children: [
+                    Text("chooseTheAppropriateBranch".tr,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff181F1F)),),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: options.length,
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (context, index) {
+                        return RadioListTile<int>(
+                          title: Text(options[index]),
+                          value: index,
+                          groupValue: selectedIndex,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          activeColor: const Color(0xff018995),
+                          contentPadding: EdgeInsets.zero,
+                          onChanged: (int? value) {
+                            setStateDialog(() {
+                              selectedIndex = value;
+                            });
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                    CustomButton(buttonText: "confirm".tr,onPressed: (){
+                      if (selectedIndex != null) {
+                        final selected = options[selectedIndex!];
+                        if (kDebugMode) {
+                          print("المختار: $selected");
+                        }
+                        Get.toNamed(RouteHelper.getProviderDetails(widget.providerData.id!));
+                      } else {
+                        if (kDebugMode) {
+                          print("لم يتم اختيار أي عنصر");
+                        }
+                      }
+                    },)
+                  ],
+                ),
+              ),
+
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +86,8 @@ class NearbyProviderListItemView extends StatelessWidget {
         isItem: true,
         child: InkWell(
           onTap: () {
-            Get.toNamed(RouteHelper.getProviderDetails(providerData.id!));
+            _showDialog();
+            //Get.toNamed(RouteHelper.getProviderDetails(providerData.id!));
           },
           child: GetBuilder<ServiceController>(builder: (serviceController) {
             return
@@ -24,101 +96,73 @@ class NearbyProviderListItemView extends StatelessWidget {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
-                          borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
-                          boxShadow: Get.find<ThemeController>().darkTheme
-                              ? null
-                              : cardShadow,
-                        ),
-                        child: Padding(
-                          padding:
-                          const EdgeInsets.all(Dimensions.paddingSizeEight),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: ResponsiveHelper.isDesktop(context) &&
-                                    !Get.find<LocalizationController>().isLtr
-                                    ? 5
-                                    : 8,
-                                child: Stack(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(Dimensions.radiusSmall)),
-                                      child: CustomImage(
-                                        image: '${providerData.logoFullPath}',
-                                        fit: BoxFit.contain,
-                                        width: double.maxFinite,
-                                        height: double.infinity,
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 50),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeTine),
-                                child: Center(
-                                  child: Text(
-                                    providerData.companyName ?? "",
-                                    style: robotoMedium.copyWith(
-                                        fontSize: Dimensions.fontSizeLarge),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                              RatingBar(
-                                rating: double.parse(providerData.avgRating.toString()),
-                                size: 15,
-                                ratingCount: providerData.ratingCount,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        const Icon(Icons.location_on,
-                                            size: 18, color: Colors.blue),
-                                        const SizedBox(width: 4),
-                                        Expanded(
-                                          child: Text(providerData.companyAddress ?? "",maxLines: 1,style: const TextStyle(
-                                            fontSize: 12,fontWeight: FontWeight.w400,color: Color(0xff6C757D),
-                                          ),),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  //const Spacer(),
-                                  const Icon(Icons.directions_walk,
-                                      size: 18, color: Colors.blue),
-                                  const SizedBox(width: 4),
-                                  Text('${(providerData.distance!).toStringAsFixed(2)} كم',style: const TextStyle(
-                                    fontSize: 12,fontWeight: FontWeight.w400,color: Color(0xff6C757D),
-                                  ),),
-                                ],
-                              ),
-                            ],
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
+                      boxShadow: Get.find<ThemeController>().darkTheme
+                          ? null
+                          : cardShadow,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                              Radius.circular(Dimensions.radiusSmall)),
+                          child: CustomImage(
+                            image: '${widget.providerData.logoFullPath}',
+                            fit: BoxFit.fitWidth,
+                            width: double.maxFinite,
+                            height:120,
                           ),
                         ),
-                      ),
-                      // Positioned.fill(child: RippleButton(onTap: () {
-                      //
-                      //   if(fromPage=="search_page"){
-                      //     Get.toNamed(RouteHelper.getServiceRoute(service.id!,fromPage:"search_page"),);
-                      //   }else{
-                      //     Get.toNamed(RouteHelper.getServiceRoute(service.id!),);
-                      //   }
-                      // }))
-                    ],
+                        const SizedBox(height: 35),
+                        Center(
+                          child: Text(
+                            widget.providerData.companyName ?? "",
+                            style: robotoMedium.copyWith(
+                                fontSize: Dimensions.fontSizeLarge),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Center(
+                          child: RatingBar(
+                            rating: double.parse(widget.providerData.avgRating.toString()),
+                            size: 15,
+                            ratingCount: widget.providerData.ratingCount,
+                          ),
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Expanded(
+                        //       child: Row(
+                        //         children: [
+                        //           const Icon(Icons.location_on,
+                        //               size: 18, color: Colors.blue),
+                        //           const SizedBox(width: 4),
+                        //           Expanded(
+                        //             child: Text(widget.providerData.companyAddress ?? "",maxLines: 1,style: const TextStyle(
+                        //               fontSize: 12,fontWeight: FontWeight.w400,color: Color(0xff6C757D),
+                        //             ),),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //     //const Spacer(),
+                        //     const Icon(Icons.directions_walk,
+                        //         size: 18, color: Colors.blue),
+                        //     const SizedBox(width: 4),
+                        //     Text('${(widget.providerData.distance!).toStringAsFixed(2)} كم',style: const TextStyle(
+                        //       fontSize: 12,fontWeight: FontWeight.w400,color: Color(0xff6C757D),
+                        //     ),),
+                        //   ],
+                        // ),
+                      ],
+                    ),
                   ),
                   //
                   // if(fromType != 'fromCampaign')
@@ -156,7 +200,6 @@ class NearbyProviderListItemView extends StatelessWidget {
                   //       ],
                   //     ),
                   //   ),
-
                   Align(
                     alignment: Alignment.center,
                     child: Container(
@@ -175,12 +218,13 @@ class NearbyProviderListItemView extends StatelessWidget {
                           ]),
                       child:  ClipOval(
                         child: CustomImage(
-                          image:  "${providerData.logoFullPath}", // مسار اللوجو
+                          image:  "${widget.providerData.logoFullPath}", // مسار اللوجو
                           fit: BoxFit.contain,height: 80,width: 80,
                         ),
                       ),
                     ),
                   ),
+
                   // Align(
                   //   alignment: Alignment.topRight,
                   //   child: FavoriteIconWidget(
