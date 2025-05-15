@@ -1,4 +1,11 @@
 {
+  "personal_information": "المعلومات الشخصية",
+  "modify_mobile_number": "تعديل رقم الجوال",
+  "payment_methods": "طرق الدفع",
+  "my_reservations": "حجوزاتي",
+  "favourite": "المفضلة",
+  "new_number": "الرقم الجديد",
+  "getPersonalInformation": "الحصول على المعلومات الشخصية",
   "on_boarding_1_title": "تطبيق الخدمات",
   "on_boarding_data_1": "استئجار مزود خدمة خبير ومحترف\nلتسهيل حياتك اليومية",
   "on_boarding_2_title": "بنقرة واحدة فقط",

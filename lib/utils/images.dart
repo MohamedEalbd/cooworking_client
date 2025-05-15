@@ -1,7 +1,17 @@
 class Images {
   static String get bgAppBar => 'img_appBar'.png;
+  static String get card => 'card'.png;
+  static String get edit2 => 'edit-2'.png;
   static String get titleLogo => 'title_logo3'.svg;
   static String get bellRinging => 'BellRinging'.svg;
+  static String get profile_icon => 'profile'.svg;
+  static String get profileIcon2 => 'profile2'.png;
+  static String get logout2 => 'logout2'.png;
+  static String get frame => 'Frame'.png;
+  static String get notification_icons => 'notification_icons'.png;
+  static String get message_text => 'message-text'.png;
+  static String get shield_tick => 'shield-tick'.png;
+  static String get hogzat => 'hogzat'.png;
   static String get logo => 'logo'.png;
   static String get logoWithName => 'logo_with_name'.png;
   static String get newSearchIcon => 'search_icon'.svg;
@@ -63,6 +73,8 @@ class Images {
   static String get cod => 'cod'.png;
   static String get pay => 'cash_on_delivery_icon'.png;
   static String get profileIcon => 'profile_icon'.png;
+  static String get logoutIcons2 => 'logout'.png;
+  static String get heart => 'heart'.png;
   static String get file=> 'file_icon'.png;
   static String get image=> 'image_icon'.png;
   static String get sendMessage=> 'send_message_icon'.png;

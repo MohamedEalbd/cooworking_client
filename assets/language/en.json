@@ -1,4 +1,11 @@
 {
+  "personal_information": "Personal information",
+  "modify_mobile_number": "Modify mobile number",
+  "payment_methods": "Payment methods",
+  "my_reservations": "My reservations",
+  "favourite": "favourite",
+  "new_number": "New number",
+  "getPersonalInformation": "getPersonalInformation",
   "on_boarding_1_title": "services app",
   "on_boarding_data_1": "Hire expert & professional service provider \nto make your daily life work easier",
   "on_boarding_2_title": "Just One Tap",

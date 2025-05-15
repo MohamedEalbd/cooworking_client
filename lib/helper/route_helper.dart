@@ -78,9 +78,13 @@ class RouteHelper {
   static const String maintenance = '/maintenance';
   static const String updateProfile = '/update-profile';
   static const String offlinePayment = '/offline-payment';
+  static const String personalInformation = '/personal_information';
+  static const String editPhoneNumber = '/editPhoneNumber';
 
 
 
+  static String getPersonalInformation() => personalInformation;
+  static String getEditPhoneNumber() => editPhoneNumber;
   static String getInitialRoute() => initial;
   static String getSplashRoute(NotificationBody? body, String? route) {
     String data = 'null';

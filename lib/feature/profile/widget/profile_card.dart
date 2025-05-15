@@ -12,10 +12,12 @@ class ProfileCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall),
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
-        height: 70,
+        height: 60,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.only(left: 12,right: 12,top: 16),
         width: Get.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
@@ -23,24 +25,24 @@ class ProfileCardItem extends StatelessWidget {
           boxShadow: Get.find<ThemeController>().darkTheme ? null : cardShadow,
         ),
 
-        child: Center(
-          child: ListTile(
-            title: Row(
-              children: [
-                Image.asset(leadingIcon,width: Dimensions.profileImageSize,),
-                const SizedBox(width: Dimensions.paddingSizeDefault,),
-                Text(title),
-              ],
-            ),
-            trailing: isDarkItem==false?Icon(trailingIcon,size: Dimensions.fontSizeDefault,color: Theme.of(context).colorScheme.primary,):
-            GetBuilder<ThemeController>(builder: (themeController){
-              return Switch(value: themeController.darkTheme, onChanged: (value){
-                themeController.toggleTheme();
-              });
-            }),
-            onTap: onTap,
-          ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(leadingIcon,width: Dimensions.profileImageSize,),
+            const SizedBox(width: Dimensions.paddingSizeDefault,),
+            Text(title,style:const TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: Color(0xff38494A)),),
+          ],
         ),
+        //ListTile(
+         // title:
+          // trailing: isDarkItem==false?Icon(trailingIcon,size: Dimensions.fontSizeDefault,color: Theme.of(context).colorScheme.primary,):
+          // GetBuilder<ThemeController>(builder: (themeController){
+          //   return Switch(value: themeController.darkTheme, onChanged: (value){
+          //     themeController.toggleTheme();
+          //   });
+          // }),
+        //  onTap: onTap,
+       // ),
       ),
     );
   }

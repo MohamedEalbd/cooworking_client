@@ -64,7 +64,8 @@ class ProfileHeader extends GetView<UserController> {
                   ],),
                 ),
 
-                isLoggedIn ? Positioned(
+                isLoggedIn ?
+                Positioned(
                   right:Get.find<LocalizationController>().isLtr ? Dimensions.paddingSizeDefault : null,
                   left:Get.find<LocalizationController>().isLtr ?null: Dimensions.paddingSizeDefault,
                   top:Dimensions.paddingSizeSmall,
